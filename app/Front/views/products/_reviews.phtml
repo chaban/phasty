@@ -1,0 +1,28 @@
+<div class="col-sm-12">
+    <?php if($reviews): ?>
+    <?php foreach ($reviews as $key=> $review): ?>
+    <ul>
+        <li><a href=""><i class="fa fa-user"></i><?php echo $review->user->name ?></a></li>
+        <li><a href=""><i class="fa fa-calendar-o"></i><?php echo $review->createdAt ?></a></li>
+    </ul>
+    <p>
+        <?php echo $review->content ?></p>
+    <hr />
+    <?php endforeach ?>
+    <?php endif ?>
+    <?php if($this->session->has('auth')): ?>
+    <div id="review_block">
+        <p><b>Write Your Review</b></p>
+        <form action="reviews/add">
+            <textarea id="reviews" name="content"></textarea>
+            <div class="row"><b class="col-sm-3">How you rate this product: </b><span class="col-sm-9 pull-left" id="jRate"></span></div>
+            <button type="button" class="btn btn-default pull-right" id="review_button" data-product-id="<?php echo $product->id ?>">
+                Submit
+            </button>
+        </form>
+    </div>
+    <?php else: ?>
+    <p>Pleas
+        <?php echo $this->tag->linkTo(["session/login", "login or sign up"]); ?> to leave review</p>
+    <?php endif ?>
+</div>

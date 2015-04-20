@@ -1,0 +1,51 @@
+<?php foreach ($pager as $product): ?>
+<div class="col-sm-4">
+    <div class="product-image-wrapper">
+        <div class="single-products">
+            <div class="productinfo text-center">
+                <img src="<?php echo $this->iwi->load($product->getImages())->showAs(268, 249); ?>" alt="" />
+                <h2>
+                <?php $this->widgets->price([ 'value'=>$product->price, 'defaultCurrency' => $this->config->app->currency, 'currentCurrency' => $this->session->get('currency') ]) ?></h2>
+                <p>
+                    <?php echo $product->name ?></p>
+                <a href="#" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Add to cart</a>
+            </div>
+            <div class="product-overlay">
+                <div class="overlay-content">
+                    <ul class="well">
+                        <?php $temp=explode( ',', $product->shortDescription) ?>
+                        <?php foreach ($temp as $key=> $value): ?>
+                        <li class="">
+                            <?php echo trim($value) ?>
+                        </li>
+                        <?php endforeach ?>
+                    </ul>
+                    <h2>
+                        <?php $this->widgets->price([ 'value'=>$product->price, 'defaultCurrency' => $this->config->app->currency, 'currentCurrency' => $this->session->get('currency') ]) ?>
+                    </h2>
+                    <p>
+                        <?php echo $this->tag->linkTo(["products/show/$product->slug", "$product->name"]); ?>
+                    </p>
+                    <div class="row">
+                        <div class="col-sm-8">
+                            <a class="btn btn-default add-to-cart" data-product-id="<?php echo $product->id ?>"><i class="fa fa-shopping-cart"></i>Add to cart</a></div>
+                        <div class="col-sm-4 pull-left">
+                            <input id="product_id_<?php echo $product->id ?>" type="number" min="1" value="1" style="width: 80%" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="choose">
+            <ul class="nav nav-pills nav-justified">
+                <li><a class="compare_wish_list" data-product-id="<?php echo $product->id ?>" data-what-list="wish" data-action="add"><i class="fa fa-plus-square"></i>Add to wishlist</a></li>
+                <li><a class="compare_wish_list" data-product-id="<?php echo $product->id ?>" data-what-list="compare" data-action="add"><i class="fa fa-plus-square"></i>Add to compare</a></li>
+            </ul>
+        </div>
+    </div>
+</div>
+<?php endforeach ?>
+<div class="clearfix"></div>
+<?php if ($pager->haveToPaginate()): ?>
+<?php echo $pager->getLayout() ?>
+<?php endif ?>

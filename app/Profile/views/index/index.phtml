@@ -1,0 +1,59 @@
+<?php
+/**
+ * @var $profile \Shop\Models\UserProfile
+ */
+?>
+<ul class="pager">
+    <li class="pull-right">
+        <?php echo $this->tag->linkTo(array(
+            "profile/index/edit",
+            "Редактировать профиль",
+            "class" => "btn btn-primary")) ?>
+    </li>
+</ul>
+<div class="center">
+    <?php echo $this->flashSession->output() ?>
+    <table class="table table-hover table-bordered">
+        <caption><h4><i>Профиль пользователя <?php echo $profile->user->name ?></i></h4></caption>
+        <tbody>
+        <tr>
+            <td>Имя</td>
+            <td><?php echo $profile->user->name; ?></td>
+            <td></td>
+        </tr>
+
+        <tr>
+            <td>Адрес электронной почты</td>
+            <td><?php echo $profile->user->email ?></td>
+        </tr>
+
+        <tr>
+            <td>Адрес</td>
+            <td><?php echo $profile->address ?></td>
+        </tr>
+
+        <tr>
+            <td>Телефон</td>
+            <td><?php echo $profile->phone ?></td>
+        </tr>
+
+        <tr>
+            <td>Дата регистрации</td>
+            <td><?php echo \Shop\Helpers\Time::niceShort($profile->created_at); ?></td>
+            <td></td>
+        </tr>
+
+        <tr>
+            <td>Последнее посещение</td>
+            <td><?php echo \Shop\Helpers\Time::niceShort($profile->last_login); ?></td>
+            <td></td>
+        </tr>
+
+        </tbody>
+    </table>
+    <div class="left">
+        <?php
+        echo $this->tag->linkTo(array('profile/index/changePassword', 'сменить пароль'));
+        ?>
+    </div>
+</div> 

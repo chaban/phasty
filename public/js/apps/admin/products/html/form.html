@@ -1,0 +1,36 @@
+<div class="widget">
+    <div class="row">
+        <div class="title pull-left .col-md-9">
+            <h4>{{ vm.title | translate:{ name: vm.formData.name } }}</h4>
+        </div>
+        <div class="pull-right .col-md-2"><a style="color:white" ui-sref="products.attributes({ id: vm.formData.$pk })" class="btn btn-primary" title="{{'Products.EditAttributes' | translate}}">{{'Products.EditAttributes' | translate}}</a>
+        </div>
+        <div class="pull-right .col-md-1"><a style="color:white" ui-sref="products.images({ id: vm.formData.$pk })" class="btn btn-primary" title="{{'Products.Images' | translate}}">{{'Products.Images' | translate}}</a>
+        </div>
+    </div>
+    <form form-for="vm.formData" validation-rules="vm.validationRules.rules" submit-with="vm.submit(data)" validation-failed="vm.validationFailed()" submit-error="vm.submitFailed(error)">
+        <label>{{'Common.Name' | translate}}</label>
+        <text-field attribute="name" autofocus placeholder="{{'Common.Name' | translate}}"></text-field>
+        <label>{{'Products.Brand' | translate}}</label>
+        <button name="brandId" type="button" class="btn btn-default" ng-model="vm.formData.brandId" data-html="0" ng-options="item.id as item.name for item in vm.formData.brands" bs-select placeholder="{{'Choose' | translate}}" required>
+            Action <span class="caret"></span>
+        </button>
+        <label>{{'Products.Category' | translate}}</label>
+        <button name="categoryId" type="button" class="btn btn-default" ng-model="vm.formData.categoryId" data-html="0" ng-options="item.id as item.title for item in vm.formData.categories" bs-select placeholder="{{'Choose' | translate}}" required>
+            Action <span class="caret"></span>
+        </button>
+        <hr />
+        <label>{{'Products.FullDescription' | translate}}</label>
+        <text-field attribute="fullDescription" multiline placeholder="{{'Products.FullDescription' | translate}}"></text-field>
+        <label>{{'Products.Price' | translate}}</label>
+        <text-field attribute="price" placeholder="{{'Products.Price' | translate}}"></text-field>
+        <label>{{'Products.MaxPrice' | translate}}</label>
+        <text-field attribute="maxPrice" placeholder="{{'Products.MaxPrice' | translate}}"></text-field>
+        <label>{{'Products.Quantity' | translate}}</label>
+        <text-field attribute="quantity" placeholder="{{'Products.Quantity' | translate}}"></text-field>
+        <select-field attribute="availability" label="{{'Products.Availability' | translate}}" options="vm.selectOptions"></select-field>
+        <select-field attribute="autoDecreaseQuantity" label="{{'Products.AutoDecreaseQuantity' | translate}}" options="vm.selectOptions"></select-field>
+        <select-field attribute="active" label="{{'Products.Active' | translate}}" options="vm.selectOptions"></select-field>
+        <submit-button button-class="btn btn-success pull-right" label="{{'Save' | translate}}"></submit-button>
+    </form>
+</div>

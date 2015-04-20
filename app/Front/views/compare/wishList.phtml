@@ -1,0 +1,43 @@
+<div id="productsList"></div>
+<?php if($products): ?>
+<?php foreach ($products as $product): ?>
+<div class="col-sm-3">
+    <div class="product-image-wrapper">
+        <div class="single-products">
+            <div class="productinfo text-center">
+                <img src="<?php echo $this->iwi->load($product->getImages())->showAs(268, 249); ?>" alt="" />
+                <h2><?php echo $product->price ?></h2>
+                <p>
+                    <?php echo $product->name ?></p>
+                <a href="#" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Add to cart</a>
+            </div>
+            <div class="product-overlay">
+                <div class="overlay-content">
+                    <ul class="well">
+                        <?php $temp=explode( ',', $product->shortDescription) ?>
+                        <?php foreach ($temp as $key=> $value): ?>
+                        <li class="">
+                            <?php echo trim($value) ?>
+                        </li>
+                        <?php endforeach ?>
+                    </ul>
+                    <h2><?php echo $product->price ?></h2>
+                    <p>
+                        <?php echo $product->name ?></p>
+                    <a href="#" class="btn btn-default add-to-cart" data-product-id="<?php echo $product->id ?>"><i class="fa fa-shopping-cart"></i>Add to cart</a>
+                </div>
+            </div>
+        </div>
+        <div class="choose">
+            <ul class="nav nav-pills nav-justified">
+                <li><a class="compare_wish_list" data-product-id="<?php echo $product->id ?>" data-what-list="wish" data-action="remove"><i class="fa fa-minus-square"></i>remove from wishlist</a></li>
+            </ul>
+        </div>
+    </div>
+</div>
+<?php endforeach; ?>
+<?php else: ?>
+<div class="alert alert-info">
+    <?php echo 'There is nothing in wish list' ?>
+</div>
+<?php endif; ?>

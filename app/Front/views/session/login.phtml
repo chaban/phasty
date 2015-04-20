@@ -1,0 +1,44 @@
+<?php $this->assets->outputCss(); echo $this->getContent() ?>
+<?php echo $this->flashSession->output() ?>
+<div align="center" class="well">
+    <form class="form-search" method="post">
+        <div class="form-group">
+            <?php echo $form->render("email") ?>
+        </div>
+        <?php foreach ($form->getMessagesFor('email') as $message) { echo $message, '
+        <br>'; } ?>
+        <div class="form-group">
+            <?php echo $form->render("password") ?>
+        </div>
+        <?php foreach ($form->getMessagesFor('password') as $message) { echo $message, '
+        <br>'; } ?>
+        <div align="center" class="remember clearfix">
+            <label>
+                <?php echo $form->render("remember") ?> Remember me</label>
+        </div>
+        <?php echo $form->render("Enter") ?>
+        <?php echo $form->render("csrf", array("value" => $this->security->getToken())) ?>
+        <?php foreach ($form->getMessagesFor('csrf') as $message) { echo $message, '
+        <br>'; } ?>
+        <hr/>
+        <div class="forgot">
+            <?php echo $this->tag->linkTo(array("session/forgotPassword", "I forgot password")); ?>
+        </div>
+        <div class="forgot">
+            <?php echo $this->tag->linkTo(array("session/signUp", "Sign Up")); ?>
+        </div>
+    </form>
+</div>
+<br/>
+<?php /*<div id="EnterSocial">
+<p><a class="zocial google" href="/social/login?provider=Google">Войти через Google</a>
+</p>
+<p><a class="zocial facebook" href="/social/login?provider=Facebook">Войти через Facebook</a>
+</p>
+<p><a class="zocial twitter" href="/social/login?provider=Twitter">Войти через Twitter</a>
+</p>
+<p><a class="zocial vkontakte" href="/social/login?provider=Vkontakte">Войти через Vkontakte</a>
+</p>
+<p><a class="zocial mailru" href="/social/login?provider=Mailru">Войти через Mailru</a>
+</p>
+</div> */ ?>

@@ -1,0 +1,23 @@
+<div class="container">
+<?php $this->partial('partials/menu'); ?>
+<div class="row clearfix">
+		<div class="col-md-12 column">
+        <?php  if(isset($breadcrumbs) && !\Shop\Helpers\Arr::is_array_empty($breadcrumbs))
+					{ $breadcrumbs = new \Shop\Plugins\Breadcrumbs(array(
+						'links' => $breadcrumbs,
+						'separator' => '<span class="divider"> >> </span>',
+						'activeLinkTemplate' => '<li><a href="{url}"><span>{label}</span></a></li>',
+						'inactiveLinkTemplate' => '<li class="active"><span>{label}</span></li>',
+						'homeLink' => $this->tag->linkTo('profile/index', '<span>Главная</span>'),
+					));
+          $breadcrumbs->run();
+          } 
+          ?>
+		</div>
+</div>
+    <?php echo $this->getContent() ?>
+    <hr />
+    <footer>
+        <p>&copy; Company 2014</p>
+    </footer>
+</div>

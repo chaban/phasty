@@ -1,0 +1,56 @@
+<div align="center">
+    <form class="form-search" method="post" role="form">
+
+        <table class="signup table">
+            <tr>
+                <td>
+                    <?php echo $form->render("name") ?>
+                    <?php foreach ($form->getMessagesFor('name') as $message) { echo $message, '
+                    <br>'; } ?>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <?php echo $form->render("email") ?>
+                    <?php foreach ($form->getMessagesFor('email') as $message) { echo $message, '
+                    <br>'; } ?>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <?php echo $form->render("password") ?>
+                    <?php foreach ($form->getMessagesFor('password') as $message) { echo $message, '
+                    <br>'; } ?>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <?php echo $form->render("confirmPassword") ?>
+                    <?php foreach ($form->getMessagesFor('confirmPassword') as $message) { echo $message, '
+                    <br>'; } ?>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <?php echo $form->render("terms") ?>
+                    <?php echo $form->label("terms") ?>
+                    <?php foreach ($form->getMessagesFor('terms') as $message) { echo $message, '
+                    <br>'; } ?>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <?php echo $form->render("Sign Up"); ?>
+                </td>
+            </tr>
+        </table>
+
+        <?php echo $form->render("csrf", array("value" => $this->security->getToken())) ?>
+        <?php foreach ($form->getMessagesFor('csrf') as $message) { echo $message, '
+        <br>'; } ?>
+
+        <hr>
+
+    </form>
+
+</div>

@@ -1,0 +1,40 @@
+<?php
+/*
+  * $var \Shop\Models\Order $order
+  */
+?>
+<?php  echo $this->flashSession->output() ?>
+    <table class="table table-bordered table-striped" align="center">
+        <thead>
+        <tr>
+            <th>Имя</th>
+            <th>Email</th>
+            <th>Телефон</th>
+            <th>Адрес</th>
+            <th>Статус</th>
+            <th>Способ доставки</th>
+            <th>К оплате</th>
+        </tr>
+        </thead>
+        <tbody>
+
+        <?php if ($pager->count()) {
+            foreach ($pager->getIterator() as $order) {
+                ?>
+                <tr>
+                    <td><?php echo $this->tag->linkTo('cart/view/' . $order->secret_key, $order->user_name ) ?></td>
+                    <td><?php echo $order->user_email ?></td>
+                    <td><?php echo $order->user_phone ?></td>
+                    <td><?php echo $order->user_address ?></td>
+                    <td><?php echo $order->status->name ?></td>
+                    <td><?php echo $order->delivery->name ?></td>
+                    <td><?php echo $order->total_price ?></td>
+                </tr>
+            <?php
+            }
+        } ?>
+        </tbody>
+    </table>
+<?php if ($pager->haveToPaginate()): ?>
+    <?php echo $pager->getLayout() ?>
+<?php endif  ?>

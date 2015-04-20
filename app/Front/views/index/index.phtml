@@ -1,0 +1,97 @@
+<?php $this->view->partial('index/_slider'); ?>
+<div class="row">
+    <div class="col-sm-12 padding-right">
+        <div class="features_items">
+            <!--features_items-->
+            <h2 class="title text-center">Features Items</h2>
+            <?php foreach ($products as $key=> $product): ?>
+            <div class="col-sm-4">
+                <div class="product-image-wrapper">
+                    <div class="single-products">
+                        <div class="productinfo text-center">
+                            <img src="<?php echo $this->iwi->load($product->getImages())->showAs(268, 249); ?>" alt="" />
+                            <h2><?php $this->widgets->price([
+                                    'value'=>$product->price,
+                                    'defaultCurrency' => $this->config->app->currency,
+                                    'currentCurrency' => $this->session->get('currency')
+                                    ]) ?></h2>
+                            <p>
+                                <?php echo $product->name ?>
+                            </p>
+                            <a class="btn btn-default add-to-cart" data-product-id="<?php echo $product->id ?>"><i class="fa fa-shopping-cart"></i>Add to cart</a>
+                        </div>
+                        <div class="product-overlay">
+                            <div class="overlay-content">
+                                <div class="attributes-overlay">
+                                    <?php echo $product->shortDescription ?></div>
+                                <h2><?php $this->widgets->price([
+                                    'value'=>$product->price,
+                                    'defaultCurrency' => $this->config->app->currency,
+                                    'currentCurrency' => $this->session->get('currency')
+                                    ]) ?></h2>
+                                <p>
+                                    <?php echo $this->tag->linkTo(["products/show/$product->slug", $product->name]); ?>
+                                </p>
+                                <a class="btn btn-default add-to-cart" data-product-id="<?php echo $product->id ?>"><i class="fa fa-shopping-cart"></i>Add to cart</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="choose">
+                        <ul class="nav nav-pills nav-justified">
+                            <li><a href="#"><i class="fa fa-plus-square"></i>Add to wishlist</a>
+                            </li>
+                            <li><a href="#"><i class="fa fa-plus-square"></i>Add to compare</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <?php endforeach; ?>
+        </div>
+        <!--features_items-->
+        <div class="recommended_items">
+            <!--recommended_items-->
+            <h2 class="title text-center">recommended items</h2>
+            <div id="recommended-item-carousel" class="carousel slide" data-ride="carousel">
+                <div class="carousel-inner">
+                    <?php foreach($products as $key=> $product): ?>
+                    <?php if($key==0 ): ?>
+                    <div class="item active">
+                        <?php endif; ?>
+                        <div class="col-sm-4">
+                            <div class="product-image-wrapper">
+                                <div class="single-products">
+                                    <div class="productinfo text-center">
+                                        <img src="<?php echo $this->iwi->load($product->getImages())->showAs(268, 134, true); ?>" alt="" />
+                                        <h2><?php $this->widgets->price([
+                                    'value'=>$product->price,
+                                    'defaultCurrency' => $this->config->app->currency,
+                                    'currentCurrency' => $this->session->get('currency')
+                                    ]) ?></h2>
+                                        <p>
+                                            <?php echo $product->name; ?></p>
+                                        <a class="btn btn-default add-to-cart" data-product-id="<?php echo $product->id ?>"><i class="fa fa-shopping-cart"></i>Add to cart</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <?php if($key==2 ): ?>
+                    </div>
+                    <div class="item">
+                        <?php endif; ?>
+                        <?php if($key==5 ): ?>
+                    </div>
+                    <?php endif; ?>
+                    <?php endforeach; ?>
+                </div>
+                <a class="left recommended-item-control" href="#recommended-item-carousel" data-slide="prev">
+                    <i class="fa fa-angle-left"></i>
+                </a>
+                <a class="right recommended-item-control" href="#recommended-item-carousel" data-slide="next">
+                    <i class="fa fa-angle-right"></i>
+                </a>
+            </div>
+        </div>
+        <!--/recommended_items-->
+    </div>
+</div>

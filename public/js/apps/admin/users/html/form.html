@@ -1,0 +1,33 @@
+<div class="widget">
+
+    <div class="title">
+        <h4>{{ vm.title | translate:{ name: vm.formData.name } }}</h4>
+    </div>
+
+    <form form-for="vm.formData" validation-rules="vm.validationRules.rules" submit-with="vm.submit(data)" validation-failed="vm.validationFailed()" submit-error="vm.submitFailed(error)">
+        <label>{{'Users.Name' | translate}}</label>
+        <text-field attribute="name" autofocus placeholder="{{'Users.Name' | translate}}"></text-field>
+        <label>{{'Common.Email' | translate}}</label>
+        <text-field attribute="email" placeholder="{{'Common.Email' | translate}}"></text-field>
+        <label>{{'Users.Password' | translate}}</label>
+        <text-field attribute="password" placeholder="{{'Users.Password' | translate}}"></text-field>
+        <label>{{'Users.Address' | translate}}</label>
+        <text-field attribute="address" placeholder="{{'Users.Address' | translate}}"></text-field>
+        <label>{{'Users.Phone' | translate}}</label>
+        <text-field attribute="phone" placeholder="{{'Users.Phone' | translate}}"></text-field>
+        <select-field attribute="mustChangePassword" label="{{'Users.MustChangePassword' | translate}}" options="vm.selectOptions"></select-field>
+        <select-field attribute="banned" label="{{'Users.Banned' | translate}}" options="vm.selectOptions"></select-field>
+        <select-field attribute="confirmed" label="{{'Users.Confirmed' | translate}}" options="vm.selectOptions"></select-field>
+
+        <p>{{'Users.CommentsCount' | translate:{ count: vm.formData.commentsCount} }}</p>
+
+        <!--<label>{{'Users.CreatedAt' | translate}}</label>
+        <input type="text" class="form-controll" placeholder="{{'Users.CreatedAt' | translate}}" ng-model="vm.formData.createdAt" data-autoclose="1" bs-datepicker required>
+
+        <label>{{'Users.LastLogin' | translate}}</label>
+        <input type="text" class="form-controll" placeholder="{{'Users.LastLogin' | translate}}" ng-model="vm.formData.lastLogin" data-autoclose="1" bs-datepicker required> -->
+        <hr/>
+
+        <submit-button button-class="btn btn-success pull-right" label="{{'Save' | translate}}"></submit-button>
+    </form>
+</div>

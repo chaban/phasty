@@ -1,0 +1,16 @@
+<div class="btn-group">
+    <button type="button" class="btn btn-default dropdown-toggle usa" data-toggle="dropdown">
+        <?php echo $currency ?>
+        <span class="caret"></span>
+    </button>
+    <ul class="dropdown-menu">
+        <?php foreach ($currencies as $key=> $value): ?>
+        <?php if($key==$currency) continue; ?>
+        <li>
+            <a href="/currencies/change/<?php echo $value['name']?>">
+                <?php echo $value[ 'name'] ?>
+            </a>
+        </li>
+        <?php endforeach ?>
+    </ul>
+</div>

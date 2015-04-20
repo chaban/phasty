@@ -1,0 +1,25 @@
+<div class="widget">
+
+    <div class="title">
+        <h4>{{ vm.title | translate:{ name: vm.formData.name } }}</h4>
+    </div>
+
+    <form form-for="vm.formData" validation-rules="vm.validationRules.rules" submit-with="vm.submit(data)" validation-failed="vm.validationFailed()" submit-error="vm.submitFailed(error)">
+        <label>{{'Common.Name' | translate}}</label>
+        <text-field attribute="name" autofocus placeholder="{{'Common.Name' | translate}}"></text-field>
+
+        <label>{{'Common.Description' | translate}}</label>
+        <text-field attribute="description" multiline placeholder="{{'Common.Description' | translate}}"></text-field>
+
+        <label>{{'Common.SeoTitle' | translate}}</label>
+        <text-field attribute="seoTitle" multiline placeholder="{{'Common.SeoTitle' | translate}}"></text-field>
+
+        <label>{{'Common.SeoKeywords' | translate}}</label>
+        <text-field attribute="seoKeywords" multiline placeholder="{{'Common.SeoKeywords' | translate}}"></text-field>
+
+        <label>{{'Common.SeoDescription' | translate}}</label>
+        <text-field attribute="seoDescription" multiline placeholder="{{'Common.SeoDescription' | translate}}"></text-field>
+
+        <submit-button button-class="btn btn-success pull-right" label="{{'Save' | translate}}"></submit-button>
+    </form>
+</div>

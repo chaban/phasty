@@ -1,0 +1,32 @@
+<div class="widget">
+    <div class="row">
+        <div class="title pull-left .col-md-10">
+            <h4>{{ vm.title | translate:{ name: vm.product.name } }}</h4>
+        </div>
+        <div class="pull-right .col-md-1"><a style="color:white" ui-sref="products.edit({ id: vm.product.$pk })" class="btn btn-primary" title="{{'Products.Edit' | translate}}">{{'Products.Edit' | translate}}</a>
+        </div>
+        <div class="pull-right .col-md-1"><a style="color:white" ui-sref="products.images({ id: vm.product.$pk })" class="btn btn-primary" title="{{'Products.Images' | translate}}">{{'Products.Images' | translate}}</a>
+        </div>
+    </div>
+    <form name="attributesForm" class="form-inline">
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>Name of attribute</th>
+                    <th>Value of attribute</th>
+                    <th>Suffix</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="(key, value) in vm.data.attributes">
+                    <td>{{value.name}}</td>
+                    <td>
+                        <input style="width: 100%" type="text" class="form-control medium" ng-model="value.value" placeholder="value" required/>
+                    </td>
+                    <td>{{value.template}}</td>
+                </tr>
+            </tbody>
+        </table>
+        <button type="submit" ng-disabled="attributesForm.$invalid" class="btn btn-success pull-right" ng-click="vm.updateAttributeValues()">{{'Save' | translate}}</button>
+    </form>
+</div>

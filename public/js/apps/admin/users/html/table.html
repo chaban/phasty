@@ -1,0 +1,35 @@
+<div class="widget-body medium no-padding">
+    <div class="table-responsive">
+        <div class="row">
+            <div class="pull-left .col-md-10" data-cc-widget-table-header ttitle="vm.title"></div>
+            <div class="pull-right .col-md-2"><a style="color:white" ui-sref="users.create" class="btn btn-primary" title="{{'Users.Create' | translate}}">{{'Common.Create' | translate}}</a>
+            </div>
+        </div>
+        <table tr-ng-grid="" items="vm.tableItems" fields="vm.fields" page-items="vm.pageItems || 10" total-items="vm.totalItems" current-page="vm.currentPage || 0" selection-mode="SingleRow" class="table table-striped table-condensed" on-data-required="vm.tableActions(currentPage, pageItems, filterBy, filterByFields, orderBy, orderByReverse)">
+            <thead>
+                <tr>
+                    <th field-name="id" cell-width="3em" display-align="right">
+                        <th field-name="mustChangePassword" cell-width="4em" display-align="right">
+                        <th field-name="banned" cell-width="4em" display-align="right">
+                        <th field-name="confirmed" cell-width="4em" display-align="right">
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>
+                        <a ui-sref="users.edit({ id: gridItem.id })" class="btn"><i class="glyphicon glyphicon-edit" title="{{'Edit' | translate}}"></i>
+                        </a>
+                    </td>
+                    <td>
+                        <span class="btn" ng-click="vm.showModal(gridItem);$event.stopPropagation()" backdrop="static" data-template="mkModalDialog.tpl.html" data-html="true" bs-modal="vm.modal">
+                        <i class="glyphicon glyphicon-remove " title="{{'Delete' | translate}}"></i>
+                        </span>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <div class="widget-foot ">
+            <div class="clearfix "></div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,32 @@
+<div class="widget">
+
+    <div class="title">
+        <h4>{{ vm.title | translate:{ name: vm.formData.name } }}</h4>
+    </div>
+
+    <form form-for="vm.formData" validation-rules="vm.validationRules.rules" submit-with="vm.submit(data)" validation-failed="vm.validationFailed()" submit-error="vm.submitFailed(error)">
+        <label>{{'Common.Name' | translate}}</label>
+        <text-field attribute="name" autofocus placeholder="{{'Common.Name' | translate}}"></text-field>
+
+        <label>{{'Common.Price' | translate}}</label>
+        <text-field attribute="price" placeholder="{{'Common.Price' | translate}}"></text-field>
+
+        <label>{{'Delivery.Free_from' | translate}}</label>
+        <text-field attribute="freeFrom" placeholder="{{'Delivery.Free_from' | translate}}"></text-field>
+
+        <label>{{'Common.Position' | translate}}</label>
+        <text-field attribute="position" placeholder="{{'Common.Position' | translate}}"></text-field>
+
+        <label>{{'Payments.Title' | translate}}</label>
+        <button name="paymentId" type="button" class="btn btn-default" ng-model="vm.formData.paymentIds" data-html="0" ng-options="item.id as item.name for item in vm.formData.payments" bs-select placeholder="{{'Choose' | translate}}" data-multiple="1" required>
+            Action <span class="caret"></span>
+        </button>
+
+        <hr/>
+
+        <radio-field attribute="active" label="{{'Common.Active' | translate}}" value="Y"></radio-field>
+        <radio-field attribute="active" label="{{'Common.Not_Active' | translate}}" value="N"></radio-field>
+
+        <submit-button ng-show="!myForm.group_id.$error.required" button-class="btn btn-success pull-right" label="{{'Save' | translate}}"></submit-button>
+    </form>
+</div>

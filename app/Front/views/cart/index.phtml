@@ -1,0 +1,26 @@
+<?php if($this->cart->total()): ?>
+<div id="productsList">
+    <section id="cart_items">
+        <div class="container">
+            <div class="table-responsive cart_info">
+                <?php $this->view->partial('cart/cartForm'); ?>
+            </div>
+        </div>
+    </section>
+    <!--/#cart_items-->
+    <section id="do_action">
+        <div class="container">
+            <div class="heading">
+                <h3>What would you like to do next?</h3>
+                <p>Choose if you have a discount code or reward points you want to use or would like to estimate your delivery cost.</p>
+            </div>
+            <?php $this->view->partial('cart/cartSummary'); ?>
+        </div>
+    </section>
+</div>
+<!--/#do_action-->
+<?php else: ?>
+<div class="alert alert-info">
+    <?php echo 'There is nothing in cart' ?>
+</div>
+<?php endif ?>

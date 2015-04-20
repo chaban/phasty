@@ -1,0 +1,15 @@
+/public/img/products/
+/public/img/cache/
+**/vendor/**
+/var/logs/
+/local/
+/.idea/
+composer.phar
+composer.lock
+.env.*.php
+.env.php
+.DS_Store
+Thumbs.db
+*.sublime*
+bowerphp.phar
+robo.phar

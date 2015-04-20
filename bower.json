@@ -1,0 +1,27 @@
+{
+    "name": "phasty",
+    "authors": [
+        "Beelab <info@bee-lab.net>",
+        "chaban"
+    ],
+    "private": true,
+    "dependencies": {
+        "jquery": "*",
+        "angular": "*",
+        "angular-animate": "*",
+        "angular-strap": "*",
+        "angular-motion": "*",
+        "angular-moment": "*",
+        "moment": "*",
+        "angular-sanitize": "*",
+        "toastr": "*",
+        "angular-restmod": "*",
+        "angular-cookies": "*",
+        "angular-loading-bar": "*",
+        "trNgGrid": "*",
+        "angular-form-for": "*",
+        "textAngular": "*",
+        "angular-ui-router": "*",
+        "angular-ui-tree": "*"
+    }
+}

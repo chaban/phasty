@@ -1,0 +1,35 @@
+<div class="widget">
+    <div class="row">
+        <div class="title pull-left .col-md-9">
+            <h4>{{ vm.title | translate:{ name: vm.product.name } }}</h4>
+        </div>
+        <div class="pull-right .col-md-1"><a style="color:white" ui-sref="products.edit({ id: vm.product.$pk })" class="btn btn-primary" title="{{'Products.Edit' | translate}}">{{'Products.Edit' | translate}}</a>
+        </div>
+        <div class="pull-right .col-md-2"><a style="color:white" ui-sref="products.attributes({ id: vm.product.$pk })" class="btn btn-primary" title="{{'Products.EditAttributes' | translate}}">{{'Products.EditAttributes' | translate}}</a>
+        </div>
+    </div>
+    <form name="myForm" ng-show="vm.data.images.length < vm.data.$metadata.maxImagesCount">
+        <fieldset>
+            <legend>Upload on form submit</legend>
+            <label>Image:</label>
+            <input type="file" ng-file-select="" ng-model="imageFile" name="image" accept="image/*" required="" />
+            <i ng-show="myForm.file.$error.required">*required</i>
+            <br>
+            <button ng-disabled="!myForm.$valid" ng-click="vm.uploadImage(imageFile)">Submit</button>
+            <span ng-show="imageFile[0].result">Upload Successful</span>
+        </fieldset>
+        <br>
+    </form>
+    <div class="row">
+        <div class="col-sm-4" ng-repeat="image in vm.data.images">
+            <div class="gallery-box">
+                <span class="title">{{image.name}}</span>
+                <div class="thumbnail"><img ng-src="{{image.path}}" />
+                </div>
+                <div class="btn-group">
+                    <a class="btn btn-xs btn-danger" ng-click="vm.deleteImage(vm.product.$pk, image.name)">Remove</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,52 @@
+<ul class="pager">
+    <li class="pull-right">
+        <?php echo $this->tag->linkTo(array( "profile/edit", "Edit profile", "class" => "btn btn-primary")) ?>
+    </li>
+</ul>
+<?php echo $this->flashSession->output() ?>
+<div class="center">
+    <table class="table table-hover table-bordered">
+        <caption>
+            <h4><i>Profile of <?php echo $profile->user->name ?> customer</i></h4>
+        </caption>
+        <tbody>
+            <tr>
+                <td>Name</td>
+                <td>
+                    <?php echo $profile->user->name; ?></td>
+            </tr>
+            <tr>
+                <td>Email</td>
+                <td>
+                    <?php echo $profile->user->email ?></td>
+            </tr>
+            <tr>
+                <td>Address</td>
+                <td>
+                    <ADDRESS>
+                        <?php echo $profile->address ?></ADDRESS>
+                </td>
+            </tr>
+            <tr>
+                <td>Phone</td>
+                <td>
+                    <?php echo $profile->phone ?></td>
+            </tr>
+            <tr>
+                <td>Registration date</td>
+                <td>
+                    <?php echo $profile->createdAt; ?></td>
+            </tr>
+            <tr>
+                <td>Last login</td>
+                <td>
+                    <?php echo $profile->lastLogin; ?></td>
+            </tr>
+        </tbody>
+    </table>
+    <div class="pull-left">
+        <?php echo $this->tag->linkTo(array('profile/changePassword', 'change password')); ?>
+    </div>
+    <div class="clearfix"></div>
+    <br />
+</div>

@@ -1,0 +1,16 @@
+<div class="widget">
+
+    <div class="title">
+        <h4>{{ vm.title | translate:{ name: vm.formData.name } }}</h4>
+    </div>
+
+    <form form-for="vm.formData" validation-rules="vm.validationRules.rules" submit-with="vm.submit(data)" validation-failed="vm.validationFailed()" submit-error="vm.submitFailed(error)">
+        <label>{{'Common.Name' | translate}}</label>
+        <text-field attribute="name" autofocus placeholder="{{'Common.Name' | translate}}"></text-field>
+
+        <label>{{'Currency.Rate' | translate}}</label>
+        <text-field attribute="rate" placeholder="{{'Currency.Rate' | translate}}"></text-field>
+
+        <submit-button button-class="btn btn-success pull-right" label="{{'Save' | translate}}"></submit-button>
+    </form>
+</div>

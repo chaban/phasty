@@ -1,0 +1,16 @@
+<div class="shop-menu pull-right">
+    <ul class="nav navbar-nav">
+        <li>
+            <?php if($this->session->has('auth')){echo $this->tag->linkTo(["profile/index", '<i class="fa fa-user"></i>Account', 'class' => ($controller == 'profile') ? 'active' : '']);} ?>
+        </li>
+        <li><a class="<?php echo ($controller == 'compare') ? 'active' : '' ?>" href="<?php echo $this->url->get('compare/show/compare'); ?>"><i class="fa fa-crosshairs"></i> CompareList</a>
+        </li>
+        <li><a class="<?php echo ($controller == 'compare') ? 'active' : '' ?>" href="<?php echo $this->url->get('compare/show/wish'); ?>"><i class="fa fa-star"></i> Wishlist</a>
+        </li>
+        <li><a class="<?php echo ($controller == 'cart') ? 'active' : '' ?>" href="<?php echo $this->url->get('cart'); ?>"><i class="fa fa-shopping-cart"></i> Cart</a>
+        </li>
+        <li>
+            <?php if($this->session->has('auth')) { echo $this->tag->linkTo(["session/logout", '<i class="fa fa-lock"></i>Log out']); }else{ echo $this->tag->linkTo(["session/login", '<i class="fa fa-lock"></i>Login/Sign up', 'class' => ($controller == 'session') ? 'active' : '']); }?>
+        </li>
+    </ul>
+</div>

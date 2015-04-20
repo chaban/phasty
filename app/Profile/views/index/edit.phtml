@@ -1,0 +1,81 @@
+<?php
+/**
+ * @var $form \Shop\Forms\ProfileForm
+ */
+echo $this->getContent()
+?>
+
+<?php //echo var_dump($pass); ?>
+
+<div align="center">
+    <?php echo $this->tag->form(array(
+        "profile/index/edit",
+        "id" => "editProfileForm",
+        "autocomplete" => "on",
+        //"enctype" => "multipart/form-data",
+        //"onbeforesubmit" => "return false"
+    )) ?>
+
+    <div align="left">
+        <h2>Редактирование профиля</h2>
+    </div>
+
+    <table class="signup table">
+        <tr>
+            <td align="right"><?php echo $form->label("username") ?></td>
+            <td>
+                <?php echo $form->render("username") ?>
+                <?php foreach ($form->getMessagesFor('username') as $message) {
+                    echo $message, '<br>';
+                } ?>
+            </td>
+        </tr>
+        <tr>
+            <td align="right"><?php echo $form->label("email") ?></td>
+            <td>
+                <?php echo $form->render("email") ?>
+                <?php foreach ($form->getMessagesFor('email') as $message) {
+                    echo $message, '<br>';
+                } ?>
+            </td>
+        </tr>
+        <tr>
+            <td align="right"><?php echo $form->label("address") ?></td>
+            <td>
+                <?php echo $form->render("address") ?>
+                <?php foreach ($form->getMessagesFor('address') as $message) {
+                    echo $message, '<br>';
+                } ?>
+            </td>
+        </tr>
+        <tr>
+            <td align="right"><?php echo $form->label("phone") ?></td>
+            <td>
+                <?php echo $form->render("phone") ?>
+                <?php foreach ($form->getMessagesFor('phone') as $message) {
+                    echo $message, '<br>';
+                } ?>
+            </td>
+        </tr>
+        <tr>
+            <td align="right"></td>
+            <td><?php
+                echo $form->render("Сохранить");
+                ?></td>
+        </tr>
+    </table>
+
+    <?php
+    echo $form->render("csrf", array("value" => $this->security->getToken()))
+    ?>
+    <?php
+    foreach ($form->getMessagesFor('csrf') as $message) {
+        echo $message, '<br>';
+    }
+    ?>
+
+    <hr/>
+
+    <?php echo $this->tag->endForm(); ?>
+
+</div>

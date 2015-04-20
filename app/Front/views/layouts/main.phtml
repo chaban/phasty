@@ -1,0 +1,8 @@
+<?php $this->view->partial('partials/header'); ?>
+<section>
+    <div class="container">
+        <?php echo $this->flashSession->output() ?>
+        <?php echo $this->getContent() ?>
+    </div>
+</section>
+<?php $this->view->partial('partials/footer'); ?>

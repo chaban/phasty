@@ -1,0 +1,144 @@
+{
+    "HEADLINE": "Phasty e-commerce with Phalcon php and Angularjs",
+    "NAVIGATION": "NAVIGATION",
+    "Admin_area": "Admin area",
+    "Common": {
+        "Name": "Name",
+        "Content": "Content",
+        "SeoTitle": "Seo Title",
+        "SeoDescription": "Seo Description",
+        "SeoKeywords": "Seo Keywords",
+        "Active": "Is Active",
+        "Not_Active": "Not active",
+        "Create": "Create new",
+        "Position": "Position",
+        "Description": "Description",
+        "Price": "Price",
+        "Email": "Email"
+    },
+    "Dashboard": {
+        "Title": "Dashboard",
+        "Url": "Dashboard <span title=\"Dashboard\" class=\"menu-icon glyphicon glyphicon-dashboard\"></span>"
+    },
+    "Categories": {
+        "Title": "Categories",
+        "Url": "Categories <span title=\"Categories\" class=\"menu-icon fa fa-folder-open-o\"></span>",
+        "Edit": "Edit Category {{name}}",
+        "Create": "Create new category"
+    },
+    "Attribute_groups": {
+        "Title": "Attribute groups",
+        "Url": "Attribute groups <span title=\"Attribute groups\" class=\"menu-icon fa fa-list-ul\"></span>",
+        "Edit": "Edit Attribute groups {{name}}",
+        "Create": "Create new group of attributes"
+    },
+    "Attributes": {
+        "Title": "Product attributes",
+        "Filter": "Use in filter",
+        "Template": "Template",
+        "Url": "Product attributes <span title=\"Product attributes\" class=\"menu-icon fa fa-tasks\"></span>",
+        "Edit": "Edit Product attribute {{name}}",
+        "Create": "Create Product attribute"
+    },
+    "Brands": {
+        "Title": "Manufacturer of products",
+        "Url": "Manufacturer of products <span title=\"Manufacturer of products\" class=\"menu-icon glyphicon glyphicon-globe\"></span>",
+        "Edit": "Edit Manufacturer of products {{name}}",
+        "Create": "Create Manufacturer of products"
+    },
+    "Currency": {
+        "Title": "Rate of exchange",
+        "Rate": "Exchange rate",
+        "Url": "Rate of exchange <span title=\"Rate of exchange\" class=\"menu-icon fa fa-money\"></span>",
+        "Edit": "Edit Rate of exchange {{name}}",
+        "Create": "Create Rate of exchange"
+    },
+    "Payments": {
+        "Title": "Payment methods",
+        "Url": "Payment methods <span title=\"Payment methods\" class=\"menu-icon fa fa-credit-card\"></span>",
+        "Edit": "Edit Payment methods {{name}}",
+        "Create": "Create Payment methods",
+        "Payment_system": "Payment system"
+    },
+    "Delivery": {
+        "Title": "Delivery methods",
+        "Url": "Delivery methods <span title=\"Delivery methods\" class=\"menu-icon fa fa-car\"></span>",
+        "Edit": "Edit Delivery methods {{name}}",
+        "Create": "Create Delivery methods",
+        "Payment_system": "Payment system",
+        "Free_from": "Free from"
+    },
+    "Discount": {
+        "Title": "Discount",
+        "Url": "Discount <span title=\"Discount\" class=\"menu-icon fa fa-level-down\"></span>",
+        "Edit": "Edit Discount {{name}}",
+        "Create": "Create Discount",
+        "Summ": "Percentage terms or Summ",
+        "Start_date": "Start of offer",
+        "End_date": "End of offer",
+        "Brands": "Discount for Brands",
+        "Categories": "Discount for product category"
+    },
+    "Orders": {
+        "Title": "Orders",
+        "Url": "Orders <span title=\"Orders\" class=\"menu-icon fa fa-tty\"></span>",
+        "Edit": "Edit Order {{name}}",
+        "Create": "Create Order",
+        "Status": "Status",
+        "AdminComment": "Comment of administrator",
+        "UserComment": "Custormer's comment"
+    },
+    "Users": {
+        "Title": "Manage Users",
+        "Url": "Manage Users <span title=\"Manage Users\" class=\"menu-icon fa fa-user\"></span>",
+        "Edit": "Edit User {{name}}",
+        "Create": "Create new User",
+        "Name": "Full name",
+        "Password": "Password",
+        "MustChangePassword": "User must change password",
+        "Banned": "User banned",
+        "Confirmed": "User confirmed",
+        "Address": "Address",
+        "Phone": "Phone",
+        "CommentsCount": "User commented {{count}} times",
+        "CreatedAt": "User created at",
+        "LastLogin": "User last time logined"
+    },
+    "Products": {
+        "Title": "Products",
+        "Url": "Products <span title=\"Products\" class=\"menu-icon fa fa-shopping-cart\"></span>",
+        "Edit": "Edit Product {{name}}",
+        "Create": "Create new product",
+        "Price": "Price",
+        "MaxPrice": "Maximum price",
+        "Active": "Active",
+        "Brand": "Product Manufacturer",
+        "Category": "Category",
+        "Quantity": "Quantity of products",
+        "Availability": "Is product Available",
+        "AutoDecreaseQuantity": "Automaticaly decrease products quantity",
+        "FullDescription": "Full description of product",
+        "Images": "Images for product",
+        "EditImages": "Edit images for prodct ",
+        "Attributes": "Values of product attributes",
+        "EditAttributes": "Edit values of product attributes"
+    },
+    "Static_pages": {
+        "Title": "Static pages",
+        "Url": "Static Pages <span title=\"Static pages\" class=\"menu-icon fa fa-newspaper-o\"></span>",
+        "Edit": "Edit Static page {{name}}",
+        "Create": "Create new static page"
+    },
+    "BUTTON_TEXT_EN": "english",
+    "BUTTON_TEXT_RU": "russian",
+    "Save": "Save",
+    "Delete": "Delete",
+    "Edit": "Edit",
+    "Item": "Item",
+    "OkText": "Ok",
+    "CancelText": "Cancel",
+    "Confirm_Delete": "Confirm Delete",
+    "Choose_lang": "Choose language",
+    "Choose": "Choose among the following..."
+
+}

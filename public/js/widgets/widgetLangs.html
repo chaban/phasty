@@ -1,0 +1,9 @@
+<div>
+<div class="btn-group pull-left translation_buttons list-group list-inline">
+     <button ng-repeat="t in translations" type="button" class="btn btn-lg flag-icon flag-icon-{{t}}" ng-click="selected = t;$eventStopPropagation()" title="{{ 'BUTTON_TEXT_'+t.toUpperCase() | translate}}" ng-class="{'selected': selected === t}">
+     </button>
+</div>
+<div class="btn-group pull-left" ng-model="button.radio" bs-radio-group>
+  <label ng-repeat="t in translations" class="btn btn-default"><input type="radio" class="btn" value="{{t}}" ng-class="{'selected': selected === t}">{{ 'BUTTON_TEXT_'+t.toUpperCase() | translate}}</label>
+</div>
+</div>

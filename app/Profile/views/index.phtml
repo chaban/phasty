@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <!-- </a><meta charset="utf-8" /> -->
+        <meta http-equiv='Content-Type' content='text/html; charset=utf-8' />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <?php echo $this->tag->getTitle() ?>
+        <?php echo $this->tag->stylesheetLink('bootstrap/css/bootstrap.css') ?>
+        <?php echo $this->tag->stylesheetLink('bootstrap/css/bootstrap-theme.css') ?>
+        <?php echo $this->tag->stylesheetLink('css/style.css') ?>
+        
+        <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
+        <!--[if lt IE 9]>
+        <script src="js/html5shiv.js"></script>
+        <![endif]-->
+        
+        <link rel="apple-touch-icon-precomposed" sizes="144x144" href="img/apple-touch-icon-144-precomposed.png" />
+        <link rel="apple-touch-icon-precomposed" sizes="114x114" href="img/apple-touch-icon-114-precomposed.png" />
+        <link rel="apple-touch-icon-precomposed" sizes="72x72" href="img/apple-touch-icon-72-precomposed.png" />
+        <link rel="apple-touch-icon-precomposed" href="img/apple-touch-icon-57-precomposed.png" />
+        
+        <?php echo $this->tag->javascriptInclude('js/jquery.min.js') ?>
+        <?php echo $this->tag->javascriptInclude('bootstrap/js/bootstrap.min.js') ?>
+        
+        <meta name="description" content="E-commerce Catalog on PhalconPhp" />
+        <meta name="author" content="Alex Nikitin" />
+    </head>
+    <body>
+        <?php echo $this->getContent() ?>
+        <?php echo $this->tag->javascriptInclude('js/scripts.js') ?>
+    </body>
+</html>

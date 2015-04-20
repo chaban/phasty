@@ -1,0 +1,188 @@
+<!doctype html>
+<html lang="en" data-ng-app="app">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <?php echo $this->tag->getTitle() ?>
+    <link rel="shortcut icon" href="favicon.ico">
+    <link href="/css/common/bootstrap.css" rel="stylesheet">
+    <link href="/css/common/bootstrap-theme.css" rel="stylesheet">
+    <link href="/css/common/font-awesome.css" rel="stylesheet">
+    <link href="/css/common/flag-icon.css" rel="stylesheet">
+    <link href="/vendor/angular-motion/dist/angular-motion.css" rel="stylesheet">
+    <link href="/vendor/toastr/toastr.css" rel="stylesheet">
+    <link href="/vendor/angular-loading-bar/build/loading-bar.css" rel="stylesheet">
+    <link href="/vendor/trNgGrid/release/trNgGrid.min.css" rel="stylesheet">
+    <link href="/vendor/angular-ui-tree/dist/angular-ui-tree.min.css" rel="stylesheet">
+    <link href="/css/admin/dashboard.css" rel="stylesheet">
+    <link href="/css/admin/theme.css" rel="stylesheet">
+
+
+</head>
+
+<body>
+
+    <div data-ng-include="'/js/apps/admin/layouts/shell.html'"></div>
+
+    <!-- Vendor -->
+    <script src="vendor/jquery/dist/jquery.min.js"></script>
+    <script src="vendor/angular/angular.min.js"></script>
+    <script src="vendor/angular-ui-router/release/angular-ui-router.js"></script>
+    <script src="vendor/angular-animate/angular-animate.js"></script>
+    <script src="vendor/angular-sanitize/angular-sanitize.js"></script>
+    <script src="vendor/angular-cookies/angular-cookies.min.js"></script>
+    <script src="vendor/angular-translate/dist/angular-translate.js"></script>
+    <script src="vendor/angular-translate/dist/angular-translate-loader-static-files.js"></script>
+    <script src="vendor/angular-translate/dist/angular-translate-storage-local.js"></script>
+    <script src="vendor/angular-translate/dist/angular-translate-storage-cookie.js"></script>
+    <script src="vendor/toastr/toastr.js"></script>
+    <script src="vendor/moment/moment.js"></script>
+    <script src="vendor/angular-moment/angular-moment.js"></script>
+    <script src="vendor/angular-restmod/dist/angular-restmod-bundle.js"></script>
+    <script src="vendor/angular-restmod/dist/styles/custom.js"></script>
+    <script src="vendor/angular-strap/dist/angular-strap.js"></script>
+    <script src="vendor/angular-strap/dist/angular-strap.tpl.js"></script>
+    <script src="vendor/angular-loading-bar/build/loading-bar.js"></script>
+    <script src="vendor/trNgGrid/release/trNgGrid.min.js"></script>
+    <script src="vendor/angular-form-for/dist/form-for.min.js"></script>
+    <script src="vendor/angular-form-for/dist/form-for.bootstrap-templates.js"></script>
+    <script src="vendor/angular-ui-tree/dist/angular-ui-tree.min.js"></script>
+    <script src="vendor/ng-file-upload/angular-file-upload-shim.min.js"></script>
+    <script src="vendor/ng-file-upload/angular-file-upload.min.js"></script>
+
+    <!-- Bootstrapping -->
+    <script src="js/app.module.js"></script>
+
+    <!--blocks-->
+    <script src="js/blocks/exception/exception.module.js"></script>
+    <script src="js/blocks/exception/exception-handler.provider.js"></script>
+    <script src="js/blocks/exception/exception.js"></script>
+    <script src="js/blocks/logger/logger.module.js"></script>
+    <script src="js/blocks/logger/logger.js"></script>
+    <script src="js/blocks/router/router.module.js"></script>
+    <script src="js/blocks/router/routehelper.js"></script>
+
+    <!--core-->
+    <script src="js/core/core.module.js"></script>
+    <script src="js/core/constants.js"></script>
+    <script src="js/core/common.js"></script>
+    <script src="js/core/config.js"></script>
+    <script src="js/core/translate.js"></script>
+    <script src="js/core/dataservice.js"></script>
+    <script src="js/core/modal.dialog.js"></script>
+
+    <!--widgets-->
+    <script src="js/widgets/widgets.module.js"></script>
+    <script src="js/widgets/ccWidgetTableHeader.js"></script>
+    <script src="js/widgets/mkWidgetTable.js"></script>
+    <script src="js/widgets/mkWidgetLangs.js"></script>
+
+    <!-- Admin area data services -->
+    <script src="js/data/data.module.js"></script>
+    <script src="js/data/repo/pages/pages.model.js"></script>
+    <script src="js/data/repo/pages/pages.form.js"></script>
+    <script src="js/data/repo/categories/categories.model.js"></script>
+    <script src="js/data/repo/attributes/attributes.model.js"></script>
+    <script src="js/data/repo/attributes/attributes.form.js"></script>
+    <script src="js/data/repo/brands/brands.model.js"></script>
+    <script src="js/data/repo/brands/brands.form.js"></script>
+    <script src="js/data/repo/currency/currency.model.js"></script>
+    <script src="js/data/repo/currency/currency.form.js"></script>
+    <script src="js/data/repo/payments/payments.model.js"></script>
+    <script src="js/data/repo/payments/payments.form.js"></script>
+    <script src="js/data/repo/delivery/delivery.model.js"></script>
+    <script src="js/data/repo/delivery/delivery.form.js"></script>
+    <script src="js/data/repo/discount/discount.model.js"></script>
+    <script src="js/data/repo/discount/discount.form.js"></script>
+    <script src="js/data/repo/orders/orders.model.js"></script>
+    <script src="js/data/repo/orders/orders.form.js"></script>
+    <script src="js/data/repo/orders/order-status.model.js"></script>
+    <script src="js/data/repo/users/users.model.js"></script>
+    <script src="js/data/repo/users/users.form.js"></script>
+    <script src="js/data/repo/products/products.model.js"></script>
+    <script src="js/data/repo/products/product-images.model.js"></script>
+    <script src="js/data/repo/products/products.form.js"></script>
+    <script src="js/data/repo/products/product-attributes.model.js"></script>
+
+    <!-- Admin - Layout -->
+    <script src="js/apps/admin/layouts/layout.module.js"></script>
+    <script src="js/apps/admin/layouts/shell.js"></script>
+
+    <!-- Admin - Dashboard -->
+    <script src="js/apps/admin/index/index.module.js"></script>
+    <script src="js/apps/admin/index/config.route.js"></script>
+    <script src="js/apps/admin/index/index.js"></script>
+
+    <!-- Admin - Static pages -->
+    <script src="js/apps/admin/pages/pages.module.js"></script>
+    <script src="js/apps/admin/pages/config.route.js"></script>
+    <script src="js/apps/admin/pages/table.js"></script>
+    <script src="js/apps/admin/pages/form.js"></script>
+
+    <!-- Admin - categories -->
+    <script src="js/apps/admin/categories/categories.module.js"></script>
+    <script src="js/apps/admin/categories/config.route.js"></script>
+    <script src="js/apps/admin/categories/categories.js"></script>
+
+    <!-- Admin - attributes of products -->
+    <script src="js/apps/admin/attributes/attributes.module.js"></script>
+    <script src="js/apps/admin/attributes/config.route.js"></script>
+    <script src="js/apps/admin/attributes/table.js"></script>
+    <script src="js/apps/admin/attributes/form.js"></script>
+
+    <!-- Admin - brands -->
+    <script src="js/apps/admin/brands/brands.module.js"></script>
+    <script src="js/apps/admin/brands/config.route.js"></script>
+    <script src="js/apps/admin/brands/table.js"></script>
+    <script src="js/apps/admin/brands/form.js"></script>
+
+    <!-- Admin - currency -->
+    <script src="js/apps/admin/currency/currency.module.js"></script>
+    <script src="js/apps/admin/currency/config.route.js"></script>
+    <script src="js/apps/admin/currency/table.js"></script>
+    <script src="js/apps/admin/currency/form.js"></script>
+
+    <!-- Admin - payment methods -->
+    <script src="js/apps/admin/payments/payments.module.js"></script>
+    <script src="js/apps/admin/payments/config.route.js"></script>
+    <script src="js/apps/admin/payments/table.js"></script>
+    <script src="js/apps/admin/payments/form.js"></script>
+
+    <!-- Admin - delivery methods -->
+    <script src="js/apps/admin/delivery/delivery.module.js"></script>
+    <script src="js/apps/admin/delivery/config.route.js"></script>
+    <script src="js/apps/admin/delivery/table.js"></script>
+    <script src="js/apps/admin/delivery/form.js"></script>
+
+    <!-- Admin - discounts -->
+    <script src="js/apps/admin/discount/discount.module.js"></script>
+    <script src="js/apps/admin/discount/config.route.js"></script>
+    <script src="js/apps/admin/discount/table.js"></script>
+    <script src="js/apps/admin/discount/form.js"></script>
+
+    <!-- Admin - orders -->
+    <script src="js/apps/admin/orders/orders.module.js"></script>
+    <script src="js/apps/admin/orders/config.route.js"></script>
+    <script src="js/apps/admin/orders/table.js"></script>
+    <script src="js/apps/admin/orders/form.js"></script>
+
+    <!-- Admin - users -->
+    <script src="js/apps/admin/users/users.module.js"></script>
+    <script src="js/apps/admin/users/config.route.js"></script>
+    <script src="js/apps/admin/users/table.js"></script>
+    <script src="js/apps/admin/users/form.js"></script>
+
+    <!-- Admin - products -->
+    <script src="js/apps/admin/products/products.module.js"></script>
+    <script src="js/apps/admin/products/config.route.js"></script>
+    <script src="js/apps/admin/products/table.js"></script>
+    <script src="js/apps/admin/products/form.js"></script>
+    <script src="js/apps/admin/products/images.js"></script>
+    <script src="js/apps/admin/products/attributes.js"></script>
+
+</body>
+
+</html>

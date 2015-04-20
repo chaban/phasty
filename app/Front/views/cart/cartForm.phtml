@@ -1,0 +1,39 @@
+<table class="table table-condensed">
+    <thead>
+        <tr class="cart_menu">
+            <td class="image">Item</td>
+            <td class="description"></td>
+            <td class="price">Price</td>
+            <td class="quantity">Quantity</td>
+            <td class="total">Total</td>
+            <td></td>
+        </tr>
+    </thead>
+    <tbody>
+        <?php foreach ($this->cart->contents() as $key => $item): ?>
+        <tr>
+            <td class="cart_product">
+                <a href="<?php echo $this->url->get('products/show/'. $item->options['slug']); ?>"><img src="<?php echo $this->iwi->load($item->options['image'])->showAs(110, 110); ?>" alt="" /></a>
+            </td>
+            <td class="cart_description">
+                <h4> <?php echo $this->tag->linkTo(['products/show/'.$item->options['slug'], "$item->name"]); ?></h4>
+            </td>
+            <td class="cart_price">
+                <?php $this->widgets->price([ 'value'=>$item->price, 'defaultCurrency' => $this->config->app->currency, 'currentCurrency' => $item->currency ]) ?>
+            </td>
+            <td class="cart_quantity">
+                <div class="cart_quantity_button">
+                    <input class="cart_quantity_input" type="number" min="1" name="quantity" value="<?php echo $item->quantity ?>" autocomplete="off" style="max-width: 50px" data-product-id="<?php echo $item->id ?>" />
+                </div>
+            </td>
+            <td class="cart_total">
+                <p class="cart_total_price">
+                    <?php $this->widgets->price([ 'value'=>$item->total(), 'defaultCurrency' => $this->config->app->currency, 'currentCurrency' => $item->currency ]) ?>
+            </td>
+            <td class="cart_delete">
+                <a class="cart_delete_product" href="javascript:void(0);" data-product-id="<?php echo $item->id ?>"><i class="fa fa-times"></i></a>
+            </td>
+        </tr>
+        <?php endforeach ?>
+    </tbody>
+</table>

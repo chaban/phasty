@@ -1,0 +1,17 @@
+.price-range {
+    padding-bottom: 20px;
+    margin-bottom: 30px;
+}
+
+a.compare_wish_list,
+a.add_to_cart {
+    cursor: pointer;
+}
+
+#cart_items .cart_info .cart_description {
+    padding-left: 20px;
+}
+
+#cart_items .cart_info .cart_total_price {
+    font-size: 18px;
+}

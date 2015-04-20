@@ -1,0 +1,117 @@
+ul.sidebar .sidebar-main a, .sidebar-footer, ul.sidebar .sidebar-list a:hover, #page-wrapper:not(.active) ul.sidebar .sidebar-title.separator {
+    /* Sidebar header and footer color */
+    
+    background: #365954;
+}
+#sidebar-wrapper {
+    /* Sidebar background color */
+    
+    background: rgba(17, 18, 17, 0.8);
+}
+ul.sidebar .sidebar-title {
+    /* Sidebar title text colour */
+    
+    color: #75b70f;
+}
+ul.sidebar .sidebar-list a.current {
+    background-color: #0480be;
+}
+.ngplus-overlay-background {
+    top: 0px;
+    left: 0px;
+    padding-left: 100px;
+    position: absolute;
+    z-index: 10000;
+    height: 100%;
+    width: 100%;
+    background-color: #607280;
+    opacity: 0.2;
+}
+.ngplus-overlay-content {
+    position: absolute;
+    /*border: 1px solid #000;*/
+    /*background-color: #fff;*/
+    
+    font-weight: bold;
+    height: 100px;
+    width: 300px;
+    height: 15em;
+    width: 20em;
+    z-index: 10000;
+    text-align: center;
+}
+/*Optional Animations*/
+
+.dissolve-animation.ng-hide-remove, .dissolve-animation.ng-hide-add {
+    display: inline !important;
+    -webkit-transition: 0.5s linear all;
+    -moz-transition: 0.5s linear all;
+    -o-transition: 0.5s linear all;
+    transition: 0.5s linear all;
+}
+.dissolve-animation.ng-hide-remove.ng-hide-remove-active, .dissolve-animation.ng-hide-add {
+    opacity: 1;
+}
+.dissolve-animation.ng-hide-add.ng-hide-add-active, .dissolve-animation.ng-hide-remove {
+    opacity: 0;
+}
+.tr-ng-grid .active {
+    border: groove lightblue;
+}
+.container {
+    width: 98%;
+}
+.translation_buttons {
+    margin: 5px;
+}
+.translation_buttons .selected {
+    background-color: darkgrey;
+}
+/* styles for categories */
+
+.tree-node {
+    border: 1px solid #dae2ea;
+    background: #f8faff;
+    color: #7c9eb2;
+}
+.tree-node-content {
+    margin: 10px;
+}
+.tree-handle {
+    padding: 10px;
+    background: #428bca;
+    color: #FFF;
+    margin-right: 10px;
+}
+.angular-ui-tree-handle:hover {} .angular-ui-tree-placeholder {
+    background: #f0f9ff;
+    border: 2px dashed #bed2db;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+}
+.ng-invalid-required {
+    border: red dotted;
+}
+.gallery-box {
+    padding: 5px;
+    margin: 7px;
+    float: left;
+    min-height: 200px;
+    border: 1px solid #ddd;
+    overflow: hidden;
+    width: 100%;
+}
+.gallery-box img {
+    width: 100%;
+    height: 100%;
+}
+.gallery-box .title {
+    height: 22px;
+    overflow: hidden;
+    display: block;
+}
+.gallery-box .thumbnail {
+    height: 99%;
+    width: 99%;
+}

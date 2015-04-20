@@ -1,0 +1,77 @@
+<div class="col-sm-12 padding-right">
+    <div class="product-details">
+        <!--product-details-->
+        <div class="col-sm-6">
+            <ul class="cd-gallery">
+                <li>
+                    <a href="javascript:void(0)">
+                        <ul class="cd-item-wrapper">
+                            <?php if(!empty($images)): ?>
+                            <?php foreach ($images as $key=> $image): ?>
+                            <li class="<?php echo ($key == 0) ? 'selected' : '' ?>"><img src="<?php echo $this->iwi->load($image)->showAs(480, 310) ?>" alt=""></li>
+                            <?php endforeach ?>
+                            <?php endif ?>
+                        </ul>
+                        <!-- cd-item-wrapper -->
+                    </a>
+                    <div class="cd-item-info">
+                    </div>
+                    <!-- cd-item-info -->
+                </li>
+            </ul>
+        </div>
+        <div class="col-sm-6">
+            <div class="product-information">
+                <!--/product-information-->
+                <h2><?php echo $product->name ?></h2>
+                <span>
+                                    <span><?php $this->widgets->price([
+                                    'value'=>$product->price,
+                                    'defaultCurrency' => $this->config->app->currency,
+                                    'currentCurrency' => $this->session->get('currency')
+                                    ]) ?></span>
+                <label>Quantity:</label>
+                <input type="number" value="1" min="1" id="product_id_<?php echo $product->id; ?>" />
+                <button type="button" class="btn btn-fefault add-to-cart cart" data-product-id="<?php echo $product->id ?>">
+                    <i class="fa fa-shopping-cart"></i> Add to cart
+                </button>
+                </span>
+                <p><b>Availability:</b>
+                    <?php echo $product->quantity ? 'In Stock' : 'Not available' ?></p>
+                <p><b>Condition:</b> New</p>
+                <p><b>Brand:</b>
+                    <?php echo $product->brand->name ?></p>
+                <p><b>Shot description:</b>
+                    <?php echo $product->shortDescription ?></p>
+                <hr />
+                <div id="jRateReadOnly" data-rate-number="<?php echo $product->rating ?>"></div>
+            </div>
+            <!--/product-information-->
+        </div>
+    </div>
+    <!--/product-details-->
+    <div class="category-tab shop-details-tab">
+        <!--category-tab-->
+        <div class="col-sm-12">
+            <ul class="nav nav-tabs">
+                <li class="active"><a href="#details" data-toggle="tab">Details</a></li>
+                <li><a href="#companyprofile" data-toggle="tab">Company Profile</a></li>
+                <li><a href="#tag" data-toggle="tab">Tag</a></li>
+                <li><a href="#reviews" data-toggle="tab">Reviews</a></li>
+            </ul>
+        </div>
+        <div class="tab-content">
+            <div class="tab-pane fade  active in" id="details">
+                <?php echo $product->fullDescription ?>
+            </div>
+            <div class="tab-pane fade" id="companyprofile">
+            </div>
+            <div class="tab-pane fade" id="tag">
+            </div>
+            <div class="tab-pane fade" id="reviews">
+                <?php $this->view->partial('products/_reviews'); ?>
+            </div>
+        </div>
+    </div>
+    <!--/category-tab-->
+</div>

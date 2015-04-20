@@ -1,0 +1,15 @@
+<a href="/cart/index" title="Перейти к оформлению заказа">
+ <div id="cart">
+   <div id="cart-title">Корзина</div>
+   <div id="cart-summarry">
+    Количество: <span id="cart-quantity" class="items">
+<?php
+echo $this->shoppingCart->getCount()
+?></span>
+    Общая цена: <span id="cart-price" class="price">
+<?php
+echo \Shop\Helpers\TextHelper::GetMoneyFormat($this->shoppingCart->getPrice())
+?> руб.</span>
+   </div> 
+ </div>
+</a>

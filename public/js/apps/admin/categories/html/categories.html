@@ -1,0 +1,53 @@
+<div class="widget-body medium no-padding">
+    <div class="table-responsive">
+        <div class="row">
+            <div class="pull-left .col-md-10" data-cc-widget-table-header ttitle="vm.title"></div>
+            <!--<button type="submit" class="btn btn-success pull-right" ng-show="vm.showSave" ng-click="vm.saveAll()">{{'Save' | translate}}</button>-->
+        </div>
+
+        <!-- Nested categories template -->
+        <script type="text/ng-template" id="categories_renderer.html">
+            <div class="tree-node">
+                <div class="pull-left tree-handle" ui-tree-handle ng-show="!child.editing">
+                    <span class="glyphicon glyphicon-list"></span>
+                </div>
+                <div class="tree-node-content" ng-show="!child.editing">
+                    <a class="btn btn-success btn-xs" nodrag ng-click="toggle(this)"><span class="glyphicon" ng-class="{'glyphicon-chevron-right': collapsed, 'glyphicon-chevron-down': !collapsed}"></span></a> <span>{{child.title}}</span>
+                    <a class="pull-right btn btn-danger btn-xs" nodrag ng-click="vm.deleteResource(this)"><span class="glyphicon glyphicon-remove"></span></a>
+                    <a class="pull-right btn btn-primary btn-xs" nodrag ng-click="vm.newSubCategory(this, child); vm.showSave = false" style="margin-right: 8px;"><span class="glyphicon glyphicon-plus"></span></a>
+                    <a class="btn btn-primary btn-xs pull-right" nodrag ng-click="vm.showSave = false;child.editing = true" style="margin-right: 8px;"><i class="glyphicon glyphicon-pencil"></i></a>
+                </div>
+                <div class="group-title angular-ui-tree-handle" nodrag ng-show="child.editing">
+                    <form name="categoriesForm" class="form-inline" role="form">
+                        <div class="form-group">
+                            <input type="text" class="form-control" ng-model="child.title" required>
+                        </div>
+                        <button type="submit" ng-disabled="categoriesForm.$invalid" class="btn btn-default" ng-click="child.editing = false; vm.showSave = true; vm.updateCategories(child)">{{'Save' | translate}}</button>
+                    </form>
+                </div>
+            </div>
+            <ol ui-tree-nodes="" ng-model="child.children" ng-class="{hidden: collapsed}">
+                <li ng-repeat="child in child.children" ui-tree-node ng-include="'categories_renderer.html'">
+                </li>
+            </ol>
+        </script>
+        <div class="form-group">
+            <form name="newCategoryForm" class="form-inline" role="form">
+                <div class="form-group">
+                    <input type="text" class="form-control"  ng-model="categoryTitle" placeholder="Category title" >
+                </div>
+                <button type="submit" class="btn btn-default" ng-click="vm.newRootCategory(categoryTitle);categoryTitle=''">{{'Common.Create' | translate}}</button>
+            </form>
+        </div>
+        <hr />
+        <div ui-tree data-drag-delay="200">
+            <ol ui-tree-nodes="" ng-model="vm.children" id="tree-root">
+                <li ng-repeat="child in vm.children" ui-tree-node ng-init="child.editing = false" ng-include="'categories_renderer.html'"></li>
+            </ol>
+        </div>
+
+        <div class="widget-foot ">
+            <div class="clearfix "></div>
+        </div>
+    </div>
+</div>

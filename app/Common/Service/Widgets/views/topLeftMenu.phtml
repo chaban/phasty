@@ -1,0 +1,22 @@
+<div class="mainmenu pull-left">
+    <ul class="nav navbar-nav collapse navbar-collapse">
+        <li><a href="<?php echo $this->url->get('index'); ?>" class="<?php echo ($controller == 'index') ? 'active' : '' ?>">Home</a>
+        </li>
+        <li><a class="<?php echo ($controller == 'catalog') ? 'active' : '' ?>" href="<?php echo $this->url->get('catalog'); ?>">Catalog</a>
+        </li>
+        <li class="dropdown"><a class="<?php echo ($controller=='pages' ) ? 'active' : '' ?>
+        " href="javascript:void(0)">Information<i class="fa fa-angle-down"></i></a>
+            <ul role="menu" class="sub-menu">
+                <li>
+                    <?php echo $this->tag->linkTo(["pages/show/about", "About us"]); ?>
+                </li>
+                <li>
+                    <?php echo $this->tag->linkTo(["pages/show/rules", "Anothe page"]); ?>
+                </li>
+            </ul>
+        </li>
+        <li>
+            <?php echo $this->tag->linkTo(["pages/contacts", "Contacts", 'class' => ($controller == 'pages' && $action == 'contacts') ? 'active' : '' ]); ?>
+        </li>
+    </ul>
+</div>

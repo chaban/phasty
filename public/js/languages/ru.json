@@ -1,0 +1,143 @@
+{
+    "HEADLINE": "Phasty e-commerce на Phalcon php и Angularjs",
+    "NAVIGATION": "Меню",
+    "Admin_area": "Управление проектом",
+    "Common": {
+        "Name": "Название",
+        "Content": "Содержание",
+        "SeoTitle": "Сео заголовок",
+        "SeoDescription": "Сео описание",
+        "SeoKeywords": "Сео ключевые слова",
+        "Active": "Показывать",
+        "Not_Active": "Не показывать",
+        "Create": "Создать",
+        "Position": "Расположение",
+        "Description": "Описание",
+        "Price": "Цена",
+        "Email": "Адрес электронной почты"
+    },
+    "Dashboard": {
+        "Title": "Панель индикаторов",
+        "Url": "Панель индикаторов <span title=\"Панель индикаторов\" class=\"menu-icon glyphicon glyphicon-dashboard\"></span>"
+    },
+    "Categories": {
+        "Title": "Категории",
+        "Url": "Категории <span title=\"Каталог\" class=\"menu-icon fa fa-folder-open-o\"></span>",
+        "Edit": "Edit категорию {{name}}",
+        "Create": "Create new категорию"
+    },
+    "Attribute_groups": {
+        "Title": "Группы аттрибутов",
+        "Url": "Группы аттрибутов <span title=\"Группы аттрибутов\" class=\"menu-icon fa fa-list-ul\"></span>",
+        "Edit": "Редактировать группу аттрибутов {{name}}",
+        "Create": "Создать новую группу аттрибутов"
+    },
+    "Attributes": {
+        "Title": "Аттрибуты товаров",
+        "Filter": "Применять в фильтре",
+        "Template": "Шаблон",
+        "Url": "Аттрибуты товаров <span title=\"Аттрибуты товаров\" class=\"menu-icon fa fa-tasks\"></span>",
+        "Edit": "Редактировать Аттрибут товаров {{name}}",
+        "Create": "Создать новый Аттрибут товаров"
+    },
+    "Brands": {
+        "Title": "Производитель товаров",
+        "Url": "Производитель товаров <span title=\"Производитель товаров\" class=\"menu-icon glyphicon glyphicon-globe\"></span>",
+        "Edit": "Редактировать Производитель товаров {{name}}",
+        "Create": "Создать Производитель товаров"
+    },
+    "Currency": {
+        "Title": "Курсы валют",
+        "Rate": "Текущий курс",
+        "Url": "Курсы валют <span title=\"Курсы валют\" class=\"menu-icon fa fa-money\"></span>",
+        "Edit": "Редактировать Курсы валют {{name}}",
+        "Create": "Создать Курсы валют"
+    },
+    "Payments": {
+        "Title": "Способы оплаты",
+        "Url": "Способы оплаты <span title=\"Способы оплаты\" class=\"menu-icon fa fa-credit-card\"></span>",
+        "Edit": "Редактировать Способы оплаты {{name}}",
+        "Create": "Создать Способы оплаты",
+        "Payment_system": "Платежная система"
+    },
+    "Delivery": {
+        "Title": "Способы доставки",
+        "Url": "Способы доставки <span title=\"Способы доставки\" class=\"menu-icon fa fa-car\"></span>",
+        "Edit": "Способы доставки {{name}}",
+        "Create": "Create Способы доставки",
+        "Payment_system": "Способ оплаты",
+        "Free_from": "Бесплатно от"
+    },
+    "Discount": {
+        "Title": "Скидки",
+        "Url": "Скидки <span title=\"Скидки\" class=\"menu-icon fa fa-level-down\"></span>",
+        "Edit": "Скидки {{name}}",
+        "Create": "Создать Скидки",
+        "Summ": "Процены или сумма",
+        "Start_date": "Начало акции",
+        "End_date": "Конец акции",
+        "Brands": "Скидки для производителей",
+        "Categories": "Скидки для категорий товаров"
+    },
+    "Orders": {
+        "Title": "Заказы",
+        "Url": "Заказы <span title=\"Заказы\" class=\"menu-icon fa fa-tty\"></span>",
+        "Edit": "Редактировать Заказ {{name}}",
+        "Create": "Создать Заказ",
+        "Status": "Статус",
+        "AdminComment": "Комментарий администратора",
+        "UserComment": "Комментарий пользователя"
+    },
+    "Users": {
+        "Title": "Управление пользователями",
+        "Url": "Управление пользователями <span title=\"Управление пользователями\" class=\"menu-icon fa fa-user\"></span>",
+        "Edit": "Редактировать пользователя {{name}}",
+        "Create": "Создать нового пользователя",
+        "Name": "Имя",
+        "Password": "Пароль",
+        "MustChangePassword": "Должен сменить пароль",
+        "Banned": "Пользователь забанен",
+        "Confirmed": "Пользователь прошел подтверждение регистрации",
+        "Address": "Адресс",
+        "Phone": "Телефон",
+        "CommentsCount": "Пользователь оставил комментарии {{count}} раз",
+        "CreatedAt": "Дата регистрации",
+        "LastLogin": "Последний раз заходил"
+    },
+    "Products": {
+        "Title": "Товары",
+        "Url": "Товары <span title=\"Товары\" class=\"menu-icon fa fa-shopping-cart\"></span>",
+        "Edit": "Редактировать Товар {{name}}",
+        "Create": "Создать новый Товар",
+        "Price": "Цена",
+        "MaxPrice": "Максимальная цена",
+        "Active": "Показывать",
+        "Brand": "Производитель товара",
+        "Category": "Категория товара",
+        "Quantity": "Доступное количество",
+        "Availability": "Есть в наличии",
+        "AutoDecreaseQuantity": "Автоматически уменьшать количество при покупке",
+        "FullDescription": "Полное описание товара",
+        "Images": "Изображения товара",
+        "EditImages": "Редактировать изображения товара ",
+        "Attributes": "Значения аттрибутов товара",
+        "EditAttributes": "Редактировать заначения аттрибутов товара"
+    },
+    "Static_pages": {
+        "Title": "Статические страницы",
+        "Url": "Статические страницы <span title=\"Статические страницы\" class=\"menu-icon fa fa-newspaper-o\"></span>",
+        "Edit": "Редактировать статическую страницу {{name}}",
+        "Create": "Создать новую статическую страницу"
+    },
+    "BUTTON_TEXT_EN": "английский",
+    "BUTTON_TEXT_RU": "русский",
+    "Save": "Сохранить",
+    "Delete": "Удалить",
+    "Edit": "Редактировать",
+    "Item": "Запись",
+    "OkText": "Подтвердить",
+    "CancelText": "Отменить",
+    "Confirm_Delete": "Подтвердить удаление",
+    "Choose_lang": "Какой язык",
+    "Choose": "Выберите из списка..."
+}

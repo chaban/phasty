@@ -1,0 +1,111 @@
+<div class="widget">
+    <div class="title">
+        <h4>{{ vm.title | translate:{ name: vm.formData.id } }}</h4>
+    </div>
+    <div class="row">
+        <div class="col-xs-12 col-sm-6 col-md-8">
+            <form form-for="vm.formData" validation-rules="vm.validationRules.rules" submit-with="vm.submit(data)" validation-failed="vm.validationFailed()" submit-error="vm.submitFailed(error)">
+                <table class="table">
+                    <tbody>
+                        <tr>
+                            <td style="width: 20%">
+                                <label>{{'Orders.Status' | translate}}</label>
+                            </td>
+                            <td>
+                                <button name="statusId" type="button" class="btn btn-default" ng-model="vm.formData.statusId" data-html="0" ng-options="item.id as item.name for item in vm.formData.statuses" bs-select placeholder="{{'Choose' | translate}}" required>
+                                    Action <span class="caret"></span>
+                                </button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <label>{{'Delivery.Title' | translate}}</label>
+                            </td>
+                            <td>
+                                <button name="deliveryId" type="button" class="btn btn-default" ng-model="vm.formData.deliveryId" data-html="0" ng-options="item.id as item.name for item in vm.formData.deliveries" bs-select placeholder="{{'Choose' | translate}}" required>
+                                    Action <span class="caret"></span>
+                                </button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <label>{{'Discount.Title' | translate}}</label>
+                            </td>
+                            <td>
+                                <button name="discountId" type="button" class="btn btn-default" ng-model="vm.formData.discountId" data-html="0" ng-options="item.id as item.name for item in vm.formData.discounts" bs-select placeholder="{{'Choose' | translate}}">
+                                    Action <span class="caret"></span>
+                                </button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <label>{{'Users.Name' | translate}}</label>
+                            </td>
+                            <td>
+                                <button name="userName" type="button" class="btn btn-default" ng-model="vm.formData.userId" data-html="0" ng-options="item.id as item.name for item in vm.formData.users" bs-select placeholder="{{'Choose' | translate}}" required>
+                                    Action <span class="caret"></span>
+                                </button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <label>{{'Common.Email' | translate}}</label>
+                            </td>
+                            <td>
+                                <text-field attribute="email" placeholder="{{'Common.Email' | translate}}"></text-field>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <label>{{'Users.Phone' | translate}}</label>
+                            </td>
+                            <td>
+                                <text-field attribute="phone" placeholder="{{'Users.Phone' | translate}}"></text-field>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <label>{{'Users.Address' | translate}}</label>
+                            </td>
+                            <td>
+                                <text-field attribute="address" placeholder="{{'Users.Address' | translate}}"></text-field>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <label>{{'Orders.AdminComment' | translate}}</label>
+                            </td>
+                            <td>
+                                <text-field attribute="adminComment" multiline placeholder="{{'Orders.AdminComment' | translate}}"></text-field>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <label>{{'Orders.UserComment' | translate}}</label>
+                            </td>
+                            <td>
+                                <text-field attribute="userComment" multiline placeholder="{{'Orders.UserComment' | translate}}"></text-field>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <span></span>
+                            </td>
+                            <td>
+                                <submit-button button-class="btn btn-success pull-right" label="{{'Save' | translate}}"></submit-button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </form>
+        </div>
+        <div class="col-xs-6 col-md-4">
+            <h4>Info</h4>
+            <p>Order created - {{vm.formData.createdAt}}</p>
+            <p>Order updated - {{vm.formData.updatedAt}}</p>
+            <p>Ordered from ip address {{vm.formData.ipAddress}}</p>
+            <p>Total price of products in order - {{vm.formData.totalPrice}}</p>
+            <p>Price with delivery - {{vm.formData.priceWithDelivery}}</p>
+        </div>
+    </div>
+</div>

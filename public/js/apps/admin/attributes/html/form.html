@@ -1,0 +1,21 @@
+<div class="widget">
+    <div class="title">
+        <h4>{{ vm.title | translate:{ name: vm.formData.name } }}</h4>
+    </div>
+    <form name="myForm" form-for="vm.formData" validation-rules="vm.validationRules.rules" submit-with="vm.submit(data)" validation-failed="vm.validationFailed()" submit-error="vm.submitFailed(error)">
+        <label>{{'Common.Name' | translate}}</label>
+        <text-field attribute="name" autofocus placeholder="{{'Common.Name' | translate}}"></text-field>
+        <label>{{'Attributes.Filter' | translate}}</label>
+        <select-field attribute="filter" options="[{value: 'Y', label: 'Yes'},{value: 'N', label: 'No'}]">
+        </select-field>
+        <label>{{'Common.Position' | translate}}</label>
+        <text-field attribute="position" placeholder="{{'Common.Position' | translate}}"></text-field>
+        <label>{{'Attributes.Template' | translate}}</label>
+        <text-field attribute="template" placeholder="{{'Attributes.Template' | translate}}"></text-field>
+        <label>{{'Categories.Title' | translate}}</label>
+        <button name="categoryId" type="button" class="btn btn-default" ng-model="vm.formData.categoryId" data-html="0" ng-options="item.id as item.title for item in vm.formData.categories" bs-select placeholder="{{'Choose' | translate}}" required>
+            Action <span class="caret"></span>
+        </button>
+        <submit-button ng-show="!myForm.group_id.$error.required" button-class="btn btn-success pull-right" label="{{'Save' | translate}}"></submit-button>
+    </form>
+</div>

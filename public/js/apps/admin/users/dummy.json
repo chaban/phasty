@@ -1,0 +1,43 @@
+{
+    "name": {
+        "common": "Belarus",
+        "official": "Republic of Belarus",
+        "native": {
+            "common": "\u0411\u0435\u043b\u0430\u0440\u0443\u0301\u0441\u044c",
+            "official": "\u0420\u044d\u0441\u043f\u0443\u0431\u043b\u0456\u043a\u0430 \u0411\u0435\u043b\u0430\u0440\u0443\u0441\u044c"
+        }
+    },
+    "tld": [".by"],
+    "cca2": "BY",
+    "ccn3": "112",
+    "cca3": "BLR",
+    "currency": ["BYR"],
+    "callingCode": ["375"],
+    "capital": "Minsk",
+    "altSpellings": ["BY", "Bielaru\u015b", "Republic of Belarus", "\u0411\u0435\u043b\u043e\u0440\u0443\u0441\u0441\u0438\u044f", "\u0420\u0435\u0441\u043f\u0443\u0431\u043b\u0438\u043a\u0430 \u0411\u0435\u043b\u0430\u0440\u0443\u0441\u044c", "Belorussiya", "Respublika Belarus\u2019"],
+    "relevance": "0",
+    "region": "Europe",
+    "subregion": "Eastern Europe",
+    "nativeLanguage": "bel",
+    "languages": {
+        "bel": "Belarusian",
+        "rus": "Russian"
+    },
+    "translations": {
+        "cym": "Belarws",
+        "deu": "Wei\u00dfrussland",
+        "fra": "Bi\u00e9lorussie",
+        "hrv": "Bjelorusija",
+        "ita": "Bielorussia",
+        "jpn": "\u30d9\u30e9\u30eb\u30fc\u30b7",
+        "nld": "Wit-Rusland",
+        "por": "Bielor\u00fassia",
+        "rus": "\u0411\u0435\u043b\u043e\u0440\u0443\u0441\u0441\u0438\u044f",
+        "spa": "Bielorrusia"
+    },
+    "latlng": [53, 28],
+    "demonym": "Belarusian",
+    "landlocked": true,
+    "borders": ["LVA", "LTU", "POL", "RUS", "UKR"],
+    "area": 207600
+}
