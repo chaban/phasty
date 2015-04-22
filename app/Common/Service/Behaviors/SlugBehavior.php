@@ -2,9 +2,11 @@
 
 use Phalcon\Mvc\Model;
 use Phalcon\Mvc\Model\Behavior;
+use Phalcon\Mvc\Model\BehaviorInterface;
+use Phalcon\Mvc\ModelInterface;
 use utilphp\util;
 
-class SlugBehavior extends Behavior
+class SlugBehavior extends Behavior implements BehaviorInterface
 {
     /**
      * The column name for the unqiue url
@@ -32,7 +34,7 @@ class SlugBehavior extends Behavior
      */
     public $url_decode = false;
 
-    public function __construct($options)
+    public function __construct($options = null)
     {
         if (isset($options['slug_col'])) {
             $this->slug_col = $options['slug_col'];
@@ -59,9 +61,9 @@ class SlugBehavior extends Behavior
      * Receive notifications from the Models Manager
      *
      * @param string $eventType
-     * @param \Phalcon\Mvc\Model $model
+     * @param ModelInterface $model
      */
-    public function notify($eventType, $model)
+    public function notify($eventType, ModelInterface $model)
     {
         if($this->overwrite) {
             if ($eventType == 'beforeValidationOnUpdate') {
@@ -515,7 +517,7 @@ class SlugBehavior extends Behavior
         return $model->getDirtyState() == Model::DIRTY_STATE_TRANSIENT;
     }
 
-    public function missingMethod($model, $method, $arguments = null)
+    public function missingMethod(ModelInterface $model, $method, $arguments = null)
     {
         if (method_exists($this, $method)) {
             //$this->setOwner($model);

@@ -7,7 +7,7 @@
     "private": true,
     "dependencies": {
         "jquery": "*",
-        "angular": "*",
+        "angular": "1.3.14",
         "angular-animate": "*",
         "angular-strap": "*",
         "angular-motion": "*",
@@ -18,7 +18,7 @@
         "angular-restmod": "*",
         "angular-cookies": "*",
         "angular-loading-bar": "*",
-        "trNgGrid": "*",
+        "trNgGrid": "~3.1.0",
         "angular-form-for": "*",
         "textAngular": "*",
         "angular-ui-router": "*",
