@@ -14,13 +14,11 @@
             <tbody>
                 <tr>
                     <td>
-                        <a ui-sref="orders.edit({ id: gridItem.id })" class=""><i class="glyphicon glyphicon-edit" title="{{'Edit' | translate}}"></i>
+                        <a ui-sref="orders.edit({ id: gridItem.id })" class="pull-left"><i class="glyphicon glyphicon-edit" title="{{'Edit' | translate}}"></i>
                         </a>
-                    </td>
-                    <td>
-                        <span class="" ng-click="vm.showModal(gridItem);$event.stopPropagation()" backdrop="static" data-template="mkModalDialog.tpl.html" data-html="true" bs-modal="vm.modal">
+                        <a class="pull-right" ng-click="vm.showModal(gridItem);$event.stopPropagation()" backdrop="static" data-template="mkModalDialog.tpl.html" data-html="true" bs-modal="vm.modal">
                         <i class="glyphicon glyphicon-remove " title="{{'Delete' | translate}}"></i>
-                        </span>
+                        </a>
                     </td>
                 </tr>
             </tbody>

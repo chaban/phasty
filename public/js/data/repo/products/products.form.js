@@ -59,8 +59,8 @@
                                 logger.success('Your form has been successfully saved');
                                 $state.go('products.index');
                             },
-                            function() {
-                                return deferred.reject('Form validation failed');
+                            function(reason) {
+                                return deferred.reject(reason.$response.data.message);
                             });
                     }, 100);
                     return deferred.promise;

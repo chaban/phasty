@@ -6,9 +6,9 @@ trait FrontControllerTrait {
         if(!$this->session->has('currency')){
             $this->session->set('currency', $this->config->app->currency);
         }
-        $forbidAccess = ['profile', 'orders', 'reviews'];
+        $forbidAccess = ['profile', 'orders', 'reviews', 'checkout'];
         if (!$this->session->has('auth') && in_array($this->dispatcher->getControllerName(), $forbidAccess)) {
-            //return $this->response->redirect('session/login');
+            $this->flash->notice('Please login or register');
             return $this->dispatcher->forward([
                 "controller" => "session",
                 "action" => "login"

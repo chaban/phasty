@@ -25,7 +25,6 @@ use InvalidArgumentException;
 class Cart
 {
     protected $id;
-
     protected $identifier;
     protected $store;
 

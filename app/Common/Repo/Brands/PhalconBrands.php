@@ -2,8 +2,9 @@
 
 
 use Phasty\Common\Models\Brands;
+use Phasty\Common\Repo\Repo;
 
-class PhalconBrands {
+class PhalconBrands extends Repo {
 
 	protected $model;
 
@@ -44,36 +45,4 @@ class PhalconBrands {
 		$result->brands = $brands->toArray();
 		return $result;
 	}
-
-	/**
-	 * Create a new brand
-	 *
-	 * @param array  Data to create a new object
-	 * @return boolean
-	 */
-	public function create(array $data) {
-		return $this->model->create($data, $this->model->getWhiteList());
-	}
-
-	/**
-	 * Update an existing brand
-	 *
-	 * @param int id of the brand
-	 * @param array  Data to update an brand
-	 * @return boolean
-	 */
-	public function update($id, array $data) {
-		return $this->model->findFirst("id = '$id'")->update($data, $this->model->getWhiteList());
-	}
-
-	/**
-	 * Delete an existing Resource
-	 *
-	 * @param int id of resource
-	 * @return boolean
-	 */
-	public function delete($id) {
-		return $this->model->findFirst("id = '$id'")->delete();
-	}
-
 }

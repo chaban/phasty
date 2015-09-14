@@ -36,6 +36,7 @@
         "Title": "Product attributes",
         "Filter": "Use in filter",
         "Template": "Template",
+        "Type": "Type of attribute value(number, string or boolean(yes, no))",
         "Url": "Product attributes <span title=\"Product attributes\" class=\"menu-icon fa fa-tasks\"></span>",
         "Edit": "Edit Product attribute {{name}}",
         "Create": "Create Product attribute"

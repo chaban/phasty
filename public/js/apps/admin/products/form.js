@@ -25,7 +25,6 @@
         function activate() {
             if ($stateParams.id) {
                 vm.formData = Products.editProduct($stateParams.id);
-                console.log(vm.formData);
                 vm.title = 'Products.Edit';
             } else {
                 Products.createProduct().then(function(data) {

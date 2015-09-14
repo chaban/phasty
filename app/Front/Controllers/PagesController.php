@@ -7,7 +7,7 @@ class PagesController extends ControllerBase
     protected function initialize()
     {
         parent::initialize();
-        $this->tag->setTitle('Currencies | E-Shopper');
+        $this->tag->setTitle('Currencies | Phasty');
     }
 
     /**
@@ -23,6 +23,7 @@ class PagesController extends ControllerBase
 
     public function showAction($slug = '')
     {
+        $slug = $this->filter->sanitize($slug, 'striptags');
         $page = Pages::findFirstBySlug($slug);
         if(!$page){
             $this->dispatcher->forward([

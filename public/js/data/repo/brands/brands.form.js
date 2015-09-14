@@ -29,8 +29,8 @@
                         data.$save().$then(function() {
                                 logger.success('Your form has been successfully saved');
                             },
-                            function() {
-                                return deferred.reject('Form validation failed');
+                            function(reason) {
+                                return deferred.reject(reason.$response.data.message);
                             });
                     }, 100);
                     return deferred.promise;

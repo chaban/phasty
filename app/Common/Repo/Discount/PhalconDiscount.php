@@ -40,7 +40,7 @@ class PhalconDiscount {
 	 */
 	public function byId($id) {
 		$brands = Brands::find(['columns' => 'id, name']);
-		$categories = Categories::find(['columns' => 'id, title']);
+		$categories = Categories::find(['id > 1' ,'columns' => 'id, title']);
 		$discount = $this->model->findFirst("id = '$id'");
 		if (!$discount || !$brands || !$categories) {
 			return false;

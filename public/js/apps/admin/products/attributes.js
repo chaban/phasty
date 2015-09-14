@@ -5,9 +5,9 @@
         .module('app.products')
         .controller('ProductAttributesController', ProductAttributesController);
 
-    ProductAttributesController.$inject = ['product-attributes.model', '$stateParams', '$state', 'logger', 'products.model', 'common'];
+    ProductAttributesController.$inject = ['product-attributes.model', 'products.model', '$stateParams', '$state', 'logger', 'common', '$sce'];
 
-    function ProductAttributesController(Attributes, $stateParams, $state, logger, Products, common) {
+    function ProductAttributesController(Attributes, Products, $stateParams, $state, logger, common, $sce) {
         var vm = this;
         vm.updateAttributeValues = updateAttributeValues;
         vm.deleteAttribute = deleteAttribute;
@@ -18,12 +18,11 @@
 
         function activate() {
             if ($stateParams.id) {
-                vm.product = Products.editProduct($stateParams.id);
                 vm.data = Attributes.editProductAttributes($stateParams.id);
                 vm.title = 'Products.Edit';
             } else {
                 logger.error('There is no Attributes for such product');
-                $state.go('products.index');
+                //$state.go('products.index');
             }
         }
 
@@ -35,13 +34,14 @@
         }
 
         function updateAttributeValues() {
-            delete vm.data.category;
+            //delete vm.data.category;
+            //delete vm.data.product;
             common.$timeout(function() {
                 vm.data.$save().$then(function() {
                         return logger.success('Your form has been successfully saved');
                     },
-                    function() {
-                        return logger.error('Form validation failed');
+                    function(reason) {
+                        return logger.error('Form validation failed for reason ' + reason.$response.data.message);
                     });
             }, 100);
         }

@@ -8,12 +8,27 @@ use Phasty\Common\Models\Categories;
 use Phalcon\Mvc\Model\Resultset\Simple as Resultset;
 use Faker;
 use Phasty\Common\Models\Reviews;
+use Phalcon\Mvc\Controller;
 
-class FakerController extends ControllerBase
+class FakerController extends Controller
 {
 
     public function fakeAction()
     {
+        /*$products = Products::find();
+        foreach($products as $product){
+            $attributeValues = $product->attributeValues;
+            $temp = [];
+            $temp = explode(",", $attributeValues);
+            foreach($temp as $key => $elem){
+                $elem = preg_replace("/[^a-zA-Z0-9]+/", "", $elem);
+                $temp[$key] = $elem;
+            }
+            $attributeValues = implode(', ', $temp);
+            $product->attributeValues = $attributeValues;
+            $product->update();
+        }
+        echo 'fine';*/
         /*$products = Products::find(['order' => 'id desc']);
         foreach ($products as $product) {
             $temp = '';

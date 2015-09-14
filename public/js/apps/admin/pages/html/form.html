@@ -4,17 +4,17 @@
         <h4>{{ vm.title | translate:{ name: vm.formData.name } }}</h4>
     </div>
 
-    <form form-for="vm.formData" validation-rules="vm.validationRules.rules" submit-with="vm.submit(data)" validation-failed="vm.validationFailed()" submit-error="vm.submitFailed(error)">
+    <form form-for="vm.formData" validation-rules="vm.validationRules.rules" submit-with="vm.submit(data)" validation-failed="vm.validationFailed()" submit-error="vm.submitFailed(error)" novalidate>
         <label>{{'Common.Name' | translate}}</label>
         <text-field attribute="name" autofocus placeholder="{{'Common.Name' | translate}}"></text-field>
         <label>{{'Common.Content' | translate}}</label>
-        <text-field attribute="content" multiline placeholder="{{'Common.Content' | translate}}"></text-field>
+        <!-- <text-field attribute="content" multiline placeholder="{{'Common.Content' | translate}}"></text-field> -->
+        <textarea ckeditor="editorOptions" ng-model="vm.formData.content" name="content" ng-required="true" ng-minlength="5"></textarea>
         <label>{{'Common.SeoDescription' | translate}}</label>
         <text-field attribute="seoDescription" multiline placeholder="{{'Common.SeoDescription' | translate}}"></text-field>
         <label>{{'Common.SeoKeywords' | translate}}</label>
         <text-field attribute="seoKeywords" multiline placeholder="{{'Common.SeoKeywords' | translate}}"></text-field>
-        <radio-field attribute="active" label="{{'Common.Active' | translate}}" value="Y"></radio-field>
-        <radio-field attribute="active" label="{{'Common.Not_Active' | translate}}" value="N"></radio-field>
+        <radio-field attribute="active" label="{{'Common.Active' | translate}}" options="vm.optionsForRadioButton"></radio-field>
         <submit-button button-class="btn btn-success pull-right" label="{{'Save' | translate}}"></submit-button>
     </form>
 </div>

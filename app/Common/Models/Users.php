@@ -1,5 +1,6 @@
 <?php namespace Phasty\Common\Models;
 
+use Phalcon\Db\RawValue;
 use Phalcon\Mvc\Model;
 use Phasty\Common\Commands\CreateEmailConfirmationCommand;
 
@@ -46,12 +47,17 @@ class Users extends Model
     public $banned;
 
     /**
+     * @var string
+     */
+    public $role;
+
+    /**
      * @return array
      */
     public static function getWhiteList()
     {
         return [
-            'id', 'name', 'email', 'password', 'mustChangePassword', 'confirmed', 'banned'
+            'id', 'name', 'email', 'password', 'mustChangePassword', 'confirmed', 'banned', 'role'
         ];
     }
 
@@ -68,8 +74,8 @@ class Users extends Model
     {
         $this->useDynamicUpdate(true);
 
-        $this->belongsTo('role_id', '\Phasty\Common\Models\Roles', 'id',
-            ['alias' => 'Role', 'reusable' => true]);
+        /*$this->belongsTo('role_id', '\Phasty\Common\Models\Roles', 'id',
+            ['alias' => 'Role', 'reusable' => true]);*/
 
         $this->hasOne('id', 'Phasty\Common\Models\UserProfile', 'userId',
             ['alias' => 'Profile']);
@@ -128,6 +134,10 @@ class Users extends Model
         //The account must be confirmed via e-mail
         if (empty($this->confirmed)) {
             $this->confirmed = 'N';
+        }
+
+        if(!$this->role){
+            $this->role = new RawValue('default');
         }
     }
 

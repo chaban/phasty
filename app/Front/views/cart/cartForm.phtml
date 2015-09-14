@@ -19,7 +19,7 @@
                 <h4> <?php echo $this->tag->linkTo(['products/show/'.$item->options['slug'], "$item->name"]); ?></h4>
             </td>
             <td class="cart_price">
-                <?php $this->widgets->price([ 'value'=>$item->price, 'defaultCurrency' => $this->config->app->currency, 'currentCurrency' => $item->currency ]) ?>
+                <?php $this->widgets->price([ 'value'=> $item->price, 'defaultCurrency' => $this->config->app->currency, 'currentCurrency' => $this->session->get('currency')]) ?>
             </td>
             <td class="cart_quantity">
                 <div class="cart_quantity_button">
@@ -28,7 +28,7 @@
             </td>
             <td class="cart_total">
                 <p class="cart_total_price">
-                    <?php $this->widgets->price([ 'value'=>$item->total(), 'defaultCurrency' => $this->config->app->currency, 'currentCurrency' => $item->currency ]) ?>
+                    <?php $this->widgets->price([ 'value'=>$item->total(), 'defaultCurrency' => $this->config->app->currency, 'currentCurrency' => $this->session->get('currency')]) ?>
             </td>
             <td class="cart_delete">
                 <a class="cart_delete_product" href="javascript:void(0);" data-product-id="<?php echo $item->id ?>"><i class="fa fa-times"></i></a>

@@ -14,7 +14,7 @@
 
     var config = {
         translations: ['ru', 'en'],
-        defaultLang: 'ru',
+        defaultLang: 'en',
         appErrorPrefix: '[Phasty Error] ', //Configure the exceptionHandler decorator
         appTitle: 'Phasty e-commerce with Phalcon and Angularjs',
         version: '0.0.1'

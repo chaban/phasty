@@ -26,7 +26,8 @@
                         required: {
                             rule: true,
                             message: 'Summ is required'
-                        }
+                        },
+                        pattern: /^[0-9]+(\.[0-9]{1,2})?$/
                     },
                     startDate: {
                         required: {
@@ -43,16 +44,16 @@
                 },
                 submit: function(data) {
                     var deferred = common.$q.defer();
+                    delete data.brands;
+                    delete data.categories;
                     common.$timeout(function() {
                         data.$save().$then(function() {
                                 logger.success('Your form has been successfully saved');
                             },
-                            function() {
-                                return deferred.reject('Form validation failed');
+                            function(reason) {
+                                return deferred.reject(reason.$response.data.message);
                             });
                     }, 100);
-                    delete data.brands;
-                    delete data.categories;
                     return deferred.promise;
                 }
             };

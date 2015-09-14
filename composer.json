@@ -7,13 +7,13 @@
   ],
   "require": {
     "brandonwamboldt/utilphp": "~1.0",
-    "phalcon/incubator": "v1.3.4",
+    "phalcon/incubator": "v2.0.1",
     "imagecow/imagecow": "1.*",
-    "philipbrown/basket": "dev-master"
+    "philipbrown/basket": "dev-master",
+    "firebase/php-jwt": "^2.1"
   },
   "require-dev": {
-    "fzaninotto/faker": "dev-master",
-    "fabfuel/prophiler": "~1.0"
+    "fzaninotto/faker": "dev-master"
   },
   "autoload": {
     "psr-4": {

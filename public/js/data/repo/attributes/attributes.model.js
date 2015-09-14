@@ -16,8 +16,8 @@
             getAll: getAll,
             deleteAttribute: deleteAttribute,
             editAttribute: editAttribute,
-            createAttribute: createAttribute
-
+            createAttribute: createAttribute,
+            getUsedAttributes: getUsedAttributes
         };
 
         return service;
@@ -28,11 +28,12 @@
             }, function() {
                 logger.error('Attributes not found');
             });
+
         }
 
         function editAttribute(id) {
-            return attributes.$find(id).$then(function(_attribute) {
-                return _attribute;
+            return attributes.$find(id).$then(function(data) {
+                return data;
             }, function(reason) {
                 logger.error('Attribute not found');
                 $state.go('attributes.index');
@@ -40,20 +41,17 @@
         }
 
         function createAttribute() {
-            var _categories = categories.getAll().$then(function(_c) {
-                console.log(_c);
-                return _c;
-            }, function() {
-                logger.error('Cannot retrive categories');
-                $state.go('attributes.index');
-            });
+            var _categories = getCategories();
             var deferred = common.$q.defer();
             var newAttribute = common.$timeout(function() {
                 return attributes.$build({
                     name: '',
-                    position: '1',
+                    position: '10',
+                    filter: 'Y',
+                    template: '',
+                    type: '',
                     categoryId: '',
-                    categories: _categories
+                    categories: common.categoriesForDropdown(_categories)
                 });
             }, 1000);
             deferred.resolve(newAttribute);
@@ -67,6 +65,33 @@
             }, function() {
                 logger.error('Something went wrong');
             });
+        }
+
+        function getUsedAttributes(id) {
+            var data = [];
+            return attributes.$search({
+                categoryId: id
+            }).$then(function(_result) {
+                angular.forEach(_result, function(value, key) {
+                    data.push({
+                        'name': value.name
+                    });
+                });
+                return data;
+            }, function(reason) {
+                logger.error('Attributes not found');
+                //$state.go('products.index');
+            });
+        }
+
+        function getCategories() {
+            var _categories = categories.getAll().$then(function(_c) {
+                return _c;
+            }, function() {
+                logger.error('Cannot retrive categories');
+                $state.go('attributes.index');
+            });
+            return _categories;
         }
     }
 })();

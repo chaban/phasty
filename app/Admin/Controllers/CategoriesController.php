@@ -12,12 +12,12 @@ class CategoriesController extends ControllerBase
     use CommanderTrait;
 
     protected $repo;
-    protected $formData;
+    protected $form;
 
     protected function initialize()
     {
         $this->repo = new PhalconCategories();
-        $this->formData = new CategoryForm();
+        $this->form = new CategoryForm();
     }
 
     /**
@@ -46,8 +46,16 @@ class CategoriesController extends ControllerBase
         if (!$result) {
             return $this->errorNotFound('Page not found');
         }
-
         return $this->apiOk($result);
+    }
+
+    /**
+     * Display the specified resource.
+     *
+     * @return Response
+     */
+    public function storeAction(){
+        return $this->errorInternalError('this action not supported');
     }
 
     /**
@@ -59,10 +67,10 @@ class CategoriesController extends ControllerBase
     public function updateAction($id)
     {
         $input = $this->request->getJsonRawBody();
-        if (($message = $this->formData->isNotValid(['title' => $input->title]))) {
+        if (($message = $this->form->isNotValid(['title' => $input->title]))) {
             return $this->errorWrongArgs($message);
         }
-        if (isset($input->children) && ($message = $this->formData->isNotValid(['title' => $input->children->title]))) {
+        if (isset($input->children) && ($message = $this->form->isNotValid(['title' => $input->children->title]))) {
             return $this->errorWrongArgs($message);
         }
 

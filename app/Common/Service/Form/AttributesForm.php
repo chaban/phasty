@@ -3,16 +3,18 @@
 use Phalcon\Validation,
     Phalcon\Validation\Validator\InclusionIn,
     Phalcon\Validation\Validator\PresenceOf;
+use Phalcon\Validation\Validator\Db\UniqueAttribute;
 
-class AttributesForm extends Validation {
+class AttributesForm extends Validation
+{
 
     public function initialize()
     {
         $this->add('name', new PresenceOf([
             'message' => 'The name is required'
         ]));
-        $this->add('group_id', new PresenceOf([
-            'message' => 'The group_id is required'
+        $this->add('categoryId', new PresenceOf([
+            'message' => 'The categoryId is required'
         ]));
         $this->add('filter', new InclusionIn(array(
             'message' => 'The filter must be Y or N',
@@ -22,11 +24,16 @@ class AttributesForm extends Validation {
         $this->add('position', new PresenceOf([
             'message' => 'The position is required'
         ]));
-        $this->add('template', new PresenceOf([
-            'message' => 'The template is required'
+        $this->add('type', new InclusionIn(array(
+            'message' => 'The type must be string, int, or bool',
+            'domain' => array('string', 'int', 'bool'),
+            'allowEmpty' => false  //if true, validation will pass when value is empty
+        )));
+        $this->add('name', new UniqueAttribute([
+                'message' => 'such attribute name already used in this categories tree',
         ]));
         $this->setFilters('name', 'string');
-        $this->setFilters('group_id', 'int');
+        $this->setFilters('categoryId', 'int');
         $this->setFilters('filter', 'striptags');
         $this->setFilters('position', 'int');
         $this->setFilters('template', 'string');

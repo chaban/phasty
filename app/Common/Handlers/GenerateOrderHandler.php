@@ -41,15 +41,19 @@ class GenerateOrderHandler extends Plugin implements CommandHandler
      */
     public function handle($command)
     {
+        // how basket works look here - https://github.com/philipbrown/basket
         $basket = new Basket(new Belarus());
+        $currencyInBasket = $basket->currency()->getName();
         foreach ($this->cart->contents() as $item) {
+            $price = null;
             $sku = $item->sku;
             $name = $item->name;
-            if ($basket->currency() !== $item->currency) {
-                $price = $this->currenciesCache->convertPrice($item->price, $item->currency, $basket->currency()->getName());
-                $price = new Money(abs((int)$price), new Currency($basket->currency()->getName()));
+            $currencyInCart = $item->currency;
+            if ($currencyInBasket !== $currencyInCart) {
+                $price = $this->currenciesCache->convertPrice($item->price, $currencyInCart, $currencyInBasket);
+                $price = new Money((int)$price, new Currency($currencyInBasket));
             } else {
-                $price = new Money((int)$item->price, new Currency($item->currency));
+                $price = new Money((int)$item->price, new Currency($currencyInBasket));
             }
 
             $basket->add($sku, $name, $price, function ($product) use ($item) {
@@ -58,6 +62,7 @@ class GenerateOrderHandler extends Plugin implements CommandHandler
                     $product->discount(new PercentageDiscount((int)$item->options['discount']['sum']));
             });
         }
+        //$this->utils->var_dump($basket);die;
         $reconciler = new DefaultReconciler;
 
         $meta = [

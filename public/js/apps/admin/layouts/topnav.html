@@ -1,13 +1,11 @@
 ﻿<div class="row header">
     <div class="col-xs-12">
-
         <div class="btn-group pull-right translation_buttons">
             <button type="button" class="btn btn-lg flag-icon flag-icon-ru" ng-click="shell.changeLanguage('ru')" title="{{ 'BUTTON_TEXT_RU' | translate}}" ng-class="{'selected': shell.selected === 'ru'}">
             </button>
             <button type="button" class="btn btn-lg flag-icon flag-icon-en" ng-click="shell.changeLanguage('en')" title="{{ 'BUTTON_TEXT_EN' | translate}}" ng-class="{'selected': shell.selected === 'en'}">
             </button>
         </div>
-
         <div class="user pull-right">
             <button class="item avatar" data-html="true" data-placement="bottom-left" data-animation="am-flip-x" bs-dropdown="shell.avatarDropdown">
                 <img src="/img/avatar.jpg">
@@ -15,7 +13,6 @@
             <div class="item dropdown">
             </div>
         </div>
-
         <div class="meta">
             <div class="page">
                 {{'Admin_area' | translate}}

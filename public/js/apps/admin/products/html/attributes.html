@@ -1,11 +1,11 @@
 <div class="widget">
     <div class="row">
         <div class="title pull-left .col-md-10">
-            <h4>{{ vm.title | translate:{ name: vm.product.name } }}</h4>
+            <h4>{{ vm.title | translate:{ name: vm.data.product.name } }}</h4>
         </div>
-        <div class="pull-right .col-md-1"><a style="color:white" ui-sref="products.edit({ id: vm.product.$pk })" class="btn btn-primary" title="{{'Products.Edit' | translate}}">{{'Products.Edit' | translate}}</a>
+        <div class="pull-right .col-md-1"><a style="color:white" ui-sref="products.edit({ id: vm.data.product.id })" class="btn btn-primary" title="{{'Products.Edit' | translate}}">{{'Products.Edit' | translate}}</a>
         </div>
-        <div class="pull-right .col-md-1"><a style="color:white" ui-sref="products.images({ id: vm.product.$pk })" class="btn btn-primary" title="{{'Products.Images' | translate}}">{{'Products.Images' | translate}}</a>
+        <div class="pull-right .col-md-1"><a style="color:white" ui-sref="products.images({ id: vm.data.product.id })" class="btn btn-primary" title="{{'Products.Images' | translate}}">{{'Products.Images' | translate}}</a>
         </div>
     </div>
     <form name="attributesForm" class="form-inline">
@@ -20,9 +20,19 @@
             <tbody>
                 <tr ng-repeat="(key, value) in vm.data.attributes">
                     <td>{{value.name}}</td>
-                    <td>
-                        <input style="width: 100%" type="text" class="form-control medium" ng-model="value.value" placeholder="value" required/>
+                    <td ng-if="value.type == 'string'">
+                        <input style="width: 100%" type="text" class="form-control medium" ng-model="value.value" placeholder="{{value.name}}" required/>
                     </td>
+                    <td ng-if="value.type == 'int'">
+                        <input style="width: 50%" type="number" class="form-control medium" ng-model="value.value" placeholder="{{value.name}}" required/>
+                    </td>
+                    <td ng-if="value.type == 'bool'">
+                        <select ng-model="value.value">
+                            <option value="Y">Yes</option>
+                            <option value="N">No</option>
+                        </select>
+                    </td>
+                    <!-- <td ng-bind-html="vm.valueInput(value.type, value.name)"></td> -->
                     <td>{{value.template}}</td>
                 </tr>
             </tbody>

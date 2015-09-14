@@ -5,6 +5,7 @@ use Phalcon\DiInterface;
 use Phalcon\Loader;
 use Phalcon\Mvc\ModuleDefinitionInterface;
 use Phalcon\Mvc\View;
+use Phasty\Common\Service\Acl\Acl;
 
 class Module implements ModuleDefinitionInterface {
 
@@ -30,5 +31,13 @@ class Module implements ModuleDefinitionInterface {
 			$view->disable();
 			return $view;
 		});
+
+        /**
+         * Access control for admin part
+         */
+
+        $di->set('acl', function(){
+            return new Acl();
+        });
 	}
 }

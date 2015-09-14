@@ -137,6 +137,13 @@ $router->addDelete('/admin/:controller/:int', [
     'action' => 'destroy',
 ]);
 
+$router->addGet('/admin/dashboard', [
+    'module' => "admin",
+    'namespace' => 'Phasty\Admin\Controllers\\',
+    'controller' => 'index',
+    'action' => "dashboard"
+]);
+
 $router->addGet('/admin/faker/fake', [
     'module' => "admin",
     'namespace' => 'Phasty\Admin\Controllers\\',

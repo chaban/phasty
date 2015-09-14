@@ -20,10 +20,15 @@
 
         function editProductAttributes(id) {
             return Attributes.$find(id).$then(function(_result) {
+                angular.forEach(_result.attributes, function(value, key) {
+                    if (value.type == 'int') {
+                        value.value = parseInt(value.value);
+                    }
+                });
                 return _result;
             }, function(reason) {
                 logger.error('Attributes not found');
-                $state.go('products.index');
+                //$state.go('products.index');
             });
         }
 
@@ -32,7 +37,7 @@
                 return _result;
             }, function(reason) {
                 logger.error('Attributes not found');
-                $state.go('products.index');
+                //$state.go('products.index');
             });
 
             common.$timeout(function() {

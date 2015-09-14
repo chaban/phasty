@@ -36,21 +36,21 @@ class Module implements ModuleDefinitionInterface {
 		/**
 		 * Images resize and cache
 		 */
-		$di->set('iwi', function () {
+		$di->setShared('iwi', function () {
 			return new Iwi();
 		});
 
 		/**
 		 * cart
 		 */
-		$di->set('cart', function () {
+		$di->setShared('cart', function () {
 			return new Cart(new Session(), new Cookie());
 		});
 
 		/**
 		 * views widgets, $namespace were app widgets is located
 		 */
-		$di->set('widgets', function () {
+		$di->setShared('widgets', function () {
 			return new WidgetFactory($namespace = '\Phasty\Common\Service\Widgets');
 		});
 	}

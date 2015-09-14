@@ -1,67 +1,156 @@
-﻿<section id="dashboard-view" class="mainbar">
-    <section class="matter">
-        <div class="container">
-            <div class="row">
-                <div class="col-md-12">
-                    <ul class="today-datas">
-                        <li class="blightblue">
-                            <div class="pull-left"><i class="fa fa-plane"></i></div>
-                            <div class="datas-text pull-right">
-                                <span class="bold">Stark Tower</span> New York, New York
-                            </div>
-                            <div class="clearfix"></div>
-                        </li>
-
-                        <li class="bblue">
-                            <div class="pull-left avenger-logo"></div>
-                            <div class="datas-text pull-right">
-                                <span class="bold">{{vm.avengerCount}}</span> Cast
-                            </div>
-                            <div class="clearfix"></div>
-                        </li>
-
-                    </ul>
+﻿<div class="container-fluid">
+    <div class="row">
+        <div class="col-sm-12 col-md-12">
+            <div class="chart-wrapper">
+                <div class="chart-title">
+                    Orders
                 </div>
-            </div>
-            <div class="row">
-                <div class="col-md-6">
-                    <div class="widget wblue">
-                        <div data-cc-widget-header title="Avengers Movie Cast"
-                             allow-collapse="true"></div>
-                        <div class="widget-content text-center text-info">
-                            <table class="table table-condensed table-striped">
-                                <thead>
-                                    <tr>
-                                        <th>Name</th>
-                                        <th>Character</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr data-ng-repeat="a in vm.avengers">
-                                        <td>{{a.name}}</td>
-                                        <td>{{a.character}}</td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </div>
-                        <div class="widget-foot">
-                            <div class="clearfix"></div>
-                        </div>
-                    </div>
+                <div class="chart-stage">
+                    <nvd3-line-chart data="vm.data[2].ordersForYear" showXAxis="true" showYAxis="true" tooltips="true" interactive="true" id="ordersForYear" showLegend="true" tooltipcontent="vm.toolTipContentFunction()" xAxisTickFormat="vm.xAxisTickFormatFunction()" margin="{left:50,top:10,bottom:20,right:10}" height="200" width="800">
+                    </nvd3-line-chart>
                 </div>
-                <div class="col-md-6">
-                    <div class="widget wlightblue">
-                        <div data-cc-widget-header title="{{vm.news.title}}"
-                             allow-collapse="true"></div>
-                        <div class="widget-content text-center text-info">
-                            <small>{{vm.news.description}}</small>
-                        </div>
-                        <div class="widget-foot">
-                            <div class="clearfix"></div>
-                        </div>
-                    </div>
+                <div class="chart-notes">
+                    This year orders
                 </div>
             </div>
         </div>
-    </section>
-</section>
+        <div class="col-sm-12 col-md-12">
+            <div class="chart-wrapper">
+                <div class="chart-title">
+                    Users
+                </div>
+                <div class="chart-stage table-responsive">
+                    <table class="table">
+                        <thead>
+                            <th>Id</th>
+                            <th>Name</th>
+                            <th>Address</th>
+                            <th>Phone</th>
+                        </thead>
+                        <tbody>
+                            <tr ng-repeat="(key, user) in vm.data[0].users">
+                                <td>{{user.id}}</td>
+                                <td>{{user.name}}</td>
+                                <td>{{user.address}}</td>
+                                <td>{{user.phone}}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="chart-notes">
+                    Last registered users
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-12 col-md-12">
+            <div class="chart-wrapper">
+                <div class="chart-title">
+                    Orders
+                </div>
+                <div class="chart-stage table-responsive">
+                    <table class="table">
+                        <thead>
+                            <th>Id</th>
+                            <th>User</th>
+                            <th>Email</th>
+                            <th>Address</th>
+                            <th>Phone</th>
+                            <th>Delivery</th>
+                            <th>Status</th>
+                        </thead>
+                        <tbody>
+                            <tr ng-repeat="(key, order) in vm.data[1].orders">
+                                <td>{{order.id}}</td>
+                                <td>{{order.userName}}</td>
+                                <td>{{order.email}}</td>
+                                <td>{{order.address}}</td>
+                                <td>{{order.phone}}</td>
+                                <td>{{order.deliveryName}}</td>
+                                <td>{{order.statusName}}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="chart-notes">
+                    Recent orders
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-6 col-md-4">
+            <div class="chart-wrapper">
+                <div class="chart-title">
+                    Cell Title
+                </div>
+                <div class="chart-stage">
+                </div>
+                <div class="chart-notes">
+                    Notes about this chart
+                </div>
+            </div>
+        </div>
+        <!-- end of three -->
+        <div class="col-sm-6 col-md-4">
+            <div class="chart-wrapper">
+                <div class="chart-title">
+                    Cell Title
+                </div>
+                <div class="chart-stage">
+                </div>
+                <div class="chart-notes">
+                    Notes about this chart
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-6 col-md-4">
+            <div class="chart-wrapper">
+                <div class="chart-title">
+                    Cell Title
+                </div>
+                <div class="chart-stage">
+                </div>
+                <div class="chart-notes">
+                    Notes about this chart
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-6 col-md-4">
+            <div class="chart-wrapper">
+                <div class="chart-title">
+                    Cell Title
+                </div>
+                <div class="chart-stage">
+                </div>
+                <div class="chart-notes">
+                    Notes about this chart
+                </div>
+            </div>
+        </div>
+        <!-- end of three -->
+        <div class="col-sm-6 col-md-4">
+            <div class="chart-wrapper">
+                <div class="chart-title">
+                    Cell Title
+                </div>
+                <div class="chart-stage">
+                </div>
+                <div class="chart-notes">
+                    Notes about this chart
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-6 col-md-4">
+            <div class="chart-wrapper">
+                <div class="chart-title">
+                    Cell Title
+                </div>
+                <div class="chart-stage">
+                </div>
+                <div class="chart-notes">
+                    Notes about this chart
+                </div>
+            </div>
+        </div>
+    </div>
+    <hr>
+    <p class="small text-muted">Built with &#9829; by <a href="https://keen.io">Keen IO</a></p>
+</div>

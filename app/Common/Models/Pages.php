@@ -62,6 +62,16 @@ class Pages extends Model
     public $seoKeywords;
 
     /**
+     * @return array
+     */
+    public static function getWhiteList()
+    {
+        return [
+            'name', 'active', 'content', 'createdAt', 'updatedAt', 'seoDescription', 'seoKeywords'
+        ];
+    }
+
+    /**
      * Initializer method for model.
      */
     public function initialize()
@@ -75,7 +85,7 @@ class Pages extends Model
             'slug_col' => 'slug', //The column name for the slug
             'title_col' => 'name', //The column name for the unqiue url
             'pk_col' => 'id', //Primary key
-            'overwrite' => true, //Overwrite slug when updating
+            'overwrite' => false, //Overwrite slug when updating
             'url_decode' => false //Decode url only usefull if you want to support high unicode characters in url
         ]));
     }
@@ -84,6 +94,12 @@ class Pages extends Model
     {
         if (!$this->active) { // use default value if the value is not set
             $this->active = new RawValue('default');
+        }
+        if(!$this->createdAt){
+            $this->createdAt = new RawValue('Now()');
+        }
+        if(!$this->updatedAt){
+            $this->updatedAt = new RawValue('Now()');
         }
     }
 

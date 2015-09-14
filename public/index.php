@@ -1,12 +1,11 @@
 <?php
 error_reporting(E_ALL);
-ini_set('phalcon.orm.not_null_validations', 'Off');
+ini_set('phalcon.orm.not_null_validations', 'on');
 //ini_set('zlib.output_compression', 'Off');
 (new \Phalcon\Debug)->listen();
 define('BASE_DIR', dirname(__DIR__));
 require_once BASE_DIR . '/vendor/autoload.php';
 $config = include BASE_DIR . "/local/config.php";
-$mailConfig = include BASE_DIR . "/local/mail.php";
 include BASE_DIR . '/config/services.php';
 //include BASE_DIR . '/config/bus_services.php';
 

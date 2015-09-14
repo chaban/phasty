@@ -16,6 +16,14 @@ class DiscountForm extends Validation {
             'message' => 'The sum is required'
         ]));
 
+        $this->add('startDate', new PresenceOf([
+            'message' => 'The startDate is required'
+        ]));
+
+        $this->add('endDate', new PresenceOf([
+            'message' => 'The endDate is required'
+        ]));
+
         $this->add('active', new InclusionIn(array(
             'message' => 'The status must be Y or N',
             'domain' => array('Y', 'N'),

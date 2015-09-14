@@ -151,7 +151,7 @@ $(document).ready(function() {
                 'productId': $(this).data('product-id')
             },
             success: Phasty.ShowSearchResult,
-            complete: [Phasty.RequestComplete, Phasty.ShowToast('error', 'product deleted from cart')]
+            complete: [Phasty.RequestComplete, Phasty.ShowToast('info', 'product deleted from cart')]
         });
     });
     $("body").delegate('input.cart_quantity_input', 'change', function() {
@@ -169,7 +169,7 @@ $(document).ready(function() {
             });
         }
 
-        window.setTimeout(sendAjax, 3000);
+        window.setTimeout(sendAjax, 1000);
     });
     $('body').delegate('#review_button', 'click', function() {
         var $this = $(this);

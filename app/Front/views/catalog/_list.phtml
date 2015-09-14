@@ -21,7 +21,7 @@
                         <?php endforeach ?>
                     </ul>
                     <h2>
-                        <?php $this->widgets->price([ 'value'=>$product->price, 'defaultCurrency' => $this->config->app->currency, 'currentCurrency' => $this->session->get('currency') ]) ?>
+                        <?php $this->widgets->price(['value'=>$product->price, 'defaultCurrency' => $this->config->app->currency, 'currentCurrency' => $this->session->get('currency') ]) ?>
                     </h2>
                     <p>
                         <?php echo $this->tag->linkTo(["products/show/$product->slug", "$product->name"]); ?>

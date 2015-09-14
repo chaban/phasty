@@ -1,7 +1,7 @@
 <?php namespace Phasty\Admin\Controllers;
 
 use Phasty\Common\Repo\Products\ProductAttributesRepo;
-use Phasty\Common\Service\Form\AttributesForm;
+use Phasty\Common\Service\Form\ProductAttributesForm;
 
 class ProductAttributesController extends ControllerBase {
 
@@ -10,7 +10,7 @@ class ProductAttributesController extends ControllerBase {
 
 	protected function initialize() {
 		$this->repo = new ProductAttributesRepo();
-		$this->form = new AttributesForm();
+		$this->form = new ProductAttributesForm();
 	}
 
 	/**
@@ -19,11 +19,7 @@ class ProductAttributesController extends ControllerBase {
 	 * @return Response
 	 */
 	public function indexAction() {
-		$attributes = $this->repo->all();
-		if (!$attributes) {
-			return $this->errorNotFound('There is no attributes');
-		}
-		return $this->apiOk($attributes);
+		return $this->errorNotFound('There is no attributes');
 	}
 
 	/**
@@ -47,13 +43,7 @@ class ProductAttributesController extends ControllerBase {
 	 * @return Response
 	 */
 	public function storeAction() {
-        $input = (array)$this->request->getJsonRawBody();
-        if(($message = $this->form->isNotValid($input))){
-            return $this->errorWrongArgs($message);
-        }
-		if (!$this->repo->create($input)) {
-			return $this->errorNotFound('Attribute not created');
-		}
+		return $this->errorNotFound('Attribute not created');
 	}
 
 	/**
@@ -64,11 +54,9 @@ class ProductAttributesController extends ControllerBase {
 	 */
 	public function updateAction($id) {
         $input = (array)$this->request->getJsonRawBody();
-        /*if(($message = $this->form->isNotValid($input))){
-            return $this->errorWrongArgs($message);
-        }*/
-		if (!$this->repo->update($id, $input)) {
-			return $this->errorNotFound('Attribute not found');
+        //$this->utils->var_dump($this->form->sanitize($input['attributes']));die;
+		if (!$this->repo->update($id, $this->form->sanitize($input['attributes']))) {
+			return $this->errorInternalError('Can not update attributes');
 		}
 	}
 

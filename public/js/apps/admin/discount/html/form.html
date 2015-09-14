@@ -1,42 +1,29 @@
 <div class="widget">
-
     <div class="title">
         <h4>{{ vm.title | translate:{ name: vm.formData.name } }}</h4>
     </div>
-
     <form form-for="vm.formData" validation-rules="vm.validationRules.rules" submit-with="vm.submit(data)" validation-failed="vm.validationFailed()" submit-error="vm.submitFailed(error)">
-
         <label>{{'Common.Name' | translate}}</label>
         <text-field attribute="name" autofocus placeholder="{{'Common.Name' | translate}}"></text-field>
-
         <label>{{'Discount.Summ' | translate}}</label>
         <text-field attribute="sum" placeholder="{{'Discount.Summ' | translate}}"></text-field>
         <hr/>
-
         <label>{{'Discount.Start_date' | translate}}</label>
         <input type="text" class="form-controll" placeholder="{{'Discount.Start_date' | translate}}" ng-model="vm.formData.startDate" data-autoclose="1" bs-datepicker required>
-
         <label>{{'Discount.End_date' | translate}}</label>
         <input type="text" class="form-controll" placeholder="{{'Discount.End_date' | translate}}" ng-model="vm.formData.endDate" data-autoclose="1" bs-datepicker required>
         <hr/>
-
         <label>{{'Discount.Brands' | translate}}</label>
         <button name="brandId" type="button" class="btn btn-default" ng-model="vm.formData.brandIds" data-html="0" ng-options="item.id as item.name for item in vm.formData.brands" bs-select placeholder="{{'Choose' | translate}}" data-multiple="1">
             Action <span class="caret"></span>
         </button>
-
         <hr />
-
         <label>{{'Discount.Categories' | translate}}</label>
         <button name="categoryId" type="button" class="btn btn-default" ng-model="vm.formData.categoryIds" data-html="0" ng-options="item.id as item.title for item in vm.formData.categories" bs-select placeholder="{{'Choose' | translate}}" data-multiple="1">
             Action <span class="caret"></span>
         </button>
-
         <hr />
-
-        <radio-field attribute="active" label="{{'Common.Active' | translate}}" value="Y"></radio-field>
-        <radio-field attribute="active" label="{{'Common.Not_Active' | translate}}" value="N"></radio-field>
-
+        <radio-field attribute="active" label="{{'Common.Active' | translate}}" options="[{value:'Y', label:'Active'},{value:'N', label:'Not Active'}]"></radio-field>
         <submit-button button-class="btn btn-success pull-right" label="{{'Save' | translate}}"></submit-button>
     </form>
 </div>

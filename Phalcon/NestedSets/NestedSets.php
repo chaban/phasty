@@ -1,5 +1,6 @@
 <?php
 /**
+ * This is port to phalcon of this  wonderful library:
  * @link https://github.com/creocoder/yii2-nested-sets
  * @copyright Copyright (c) 2015 Alexander Kochetov
  * @license http://opensource.org/licenses/BSD-3-Clause
@@ -9,16 +10,11 @@ namespace Phalcon\NestedSets;
 use Phalcon\Db\RawValue;
 use Phalcon\Mvc\Model;
 use Phalcon\Mvc\Model\Behavior;
-use utilphp\util;
 use Exception;
 
-//use yii\db\\Phalcon\Db\RawValue;
 
 /**
- * NestedSetsBehavior
- *
- *
- * @author Alexander Kochetov <creocoder@gmail.com>
+ * NestedSets
  */
 abstract class NestedSets extends Model
 {
@@ -287,23 +283,16 @@ abstract class NestedSets extends Model
      */
     public function parents($depth = null)
     {
-        /*$condition = [
-            'and',
-            ['<', $this->leftAttribute, $this->getLeft()],
-            ['>', $this->rightAttribute, $this->getRight()],
-        ];*/
         $query = $this->initQuery()
             ->where($this->getLeftName() . ' < ' . $this->getLeft() . ' and ' . $this->getRightName() . ' > ' . $this->getRight());
 
         if ($depth) {
-            //$condition[] = ['>=', $this->depthAttribute, $this->getDepth() - $depth];
             $query->andWhere($this->getDepthName() . ' >= ' . $this->getDepth() - $depth);
         }
 
         $query = $this->applyTreeAttributeCondition($query);
         $query->orderBy($this->getLeftName() . ' asc');
 
-        //return $this->find()->andWhere($condition)->addOrderBy([$this->leftAttribute => SORT_ASC]);
         return $this->find($query->getParams());
     }
 
@@ -314,23 +303,15 @@ abstract class NestedSets extends Model
      */
     public function children($depth = null)
     {
-        /*$condition = [
-            'and',
-            ['>', $this->leftAttribute, $this->getLeft()],
-            ['<', $this->rightAttribute, $this->getRight()],
-        ];*/
-
         $query = $this->initQuery()
             ->where($this->getLeftName() . ' > ' . $this->getLeft() . ' and ' . $this->getRightName() . ' < ' . $this->getRight());
 
         if ($depth !== null) {
-            //$condition[] = ['<=', $this->depthAttribute, $this->getDepth() + $depth];
             $query->andWhere($this->getDepthName() . " <= '$depth' + " . $this->getDepth());
         }
 
         $query = $this->applyTreeAttributeCondition($query);
 
-        //return $this->find()->andWhere($condition)->addOrderBy([$this->leftAttribute => SORT_ASC]);
         return $this->find($query->getParams());
     }
 
@@ -340,18 +321,10 @@ abstract class NestedSets extends Model
      */
     public function leaves()
     {
-        /*$condition = [
-            'and',
-            ['>', $this->leftAttribute, $this->getLeft()],
-            ['<', $this->rightAttribute, $this->getRight()],
-            [$this->rightAttribute => new RawValue($this->getDb()->quoteColumnName($this->leftAttribute) . '+ 1')],
-        ];*/
         $query = $this->initQuery()
             ->where($this->getLeftName() . ' > ' . $this->getLeft() . ' and ' . $this->getRightName() . ' < ' . $this->getRight());
 
         $query = $this->applyTreeAttributeCondition($query);
-
-        //return $this->find()->andWhere($condition)->addOrderBy([$this->leftAttribute => SORT_ASC]);
         return $query->execute();
     }
 
@@ -361,12 +334,10 @@ abstract class NestedSets extends Model
      */
     public function prev()
     {
-        //$condition = [$this->rightAttribute => $this->getLeft() - 1];
         $query = $this->initQuery()
             ->where($this->getRightName() . ' = ' . $this->getLeft() - 1);
         $query = $this->applyTreeAttributeCondition($query);
 
-        //return $this->find()->andWhere($condition);
         return $query->execute();
     }
 
@@ -376,12 +347,10 @@ abstract class NestedSets extends Model
      */
     public function next()
     {
-        //$condition = [$this->leftAttribute => $this->getRight() + 1];
         $query = $this->initQuery()
             ->where($this->getLeftName() . ' = ' . $this->getRight() + 1);
         $query = $this->applyTreeAttributeCondition($query);
 
-        //return $this->find()->andWhere($condition);
         return $this->find($query->getParams());
     }
 
@@ -436,9 +405,6 @@ abstract class NestedSets extends Model
      */
     public function beforeCreate()
     {
-        /*if (!$this->node || $this->operation == self::OPERATION_MAKE_ROOT) {
-            return $this->beforeInsertRootNode();
-        }*/
         if ($this->node !== null && !$this->node->getIsNewRecord()) {
             $this->node->refresh();
         }
@@ -517,11 +483,6 @@ abstract class NestedSets extends Model
             if (!isset($primaryKey)) {
                 throw new Exception('"' . get_class($this) . '" must have a primary key.');
             }
-            //$this->setOperation(null);
-            /*$this->owner->updateAll(
-                [$this->treeAttribute => $this->owner->getAttribute($this->treeAttribute)],
-                [$primaryKey[0] => $this->owner->getAttribute($this->treeAttribute)]
-            );*/
             $nodes = $this->query()->where($this->getKeyName() . ' = ' . $this->getRoot())->execute();
             foreach($nodes as $node){
                 $node->update([$this->getRootName() => $this->getRoot()]);
@@ -650,15 +611,10 @@ abstract class NestedSets extends Model
                 $rightValue += $delta;
             }
 
-            //$condition = ['and', ['>=', $this->leftAttribute, $leftValue], ['<=', $this->rightAttribute, $rightValue]];
             $query = $this->initQuery()
                 ->where($this->getLeftName() . ' >= ' . $leftValue . ' and ' . $this->getRightName() . ' <= ' . $rightValue);
             $query = $this->applyTreeAttributeCondition($query);
 
-            /*$this->updateAll(
-                [$this->depthAttribute => new RawValue($depthAttribute . sprintf('%+d', $depth))],
-                $condition
-            );*/
             $nodes = $query->execute();
             foreach ($nodes as $node) {
                 $node->update([
@@ -667,14 +623,9 @@ abstract class NestedSets extends Model
             }
 
             foreach ([$this->getLeftName(), $this->getRightName()] as $attribute) {
-                //$condition = ['and', ['>=', $attribute, $leftValue], ['<=', $attribute, $rightValue]];
                 $query = $this->query()->where($attribute . ' >= ' . $leftValue . ' and ' . $attribute . ' <= ' . $rightValue);
                 $query = $this->applyTreeAttributeCondition($query);
 
-                /*$this->updateAll(
-                    [$attribute => new RawValue("$attribute" . sprintf('%+d', $value - $leftValue))],
-                    $query
-                );*/
                 $nodes = $query->execute();
                 foreach ($nodes as $node) {
                     $node->update([$attribute => new RawValue($attribute . sprintf('%+d', $value - $leftValue))]);
@@ -688,10 +639,6 @@ abstract class NestedSets extends Model
             $nodeRootValue = $this->node->getRoot();
 
             foreach ([$this->getLeftName(), $this->getRightName()] as $attribute) {
-                /*$this->updateAll(
-                    [$attribute => new RawValue($db->quoteColumnName($attribute) . sprintf('%+d', $rightValue - $leftValue + 1))],
-                    ['and', ['>=', $attribute, $value], [$this->treeAttribute => $nodeRootValue]]
-                );*/
                 $nodes = $this->query()->where($attribute . ' >= ' . $value . ' and ' . $this->getRootName() . ' = ' . $nodeRootValue);
                 foreach ($nodes as $node) {
                     $node->update([$attribute => new RawValue($attribute . sprintf('%+d', $rightValue - $leftValue + 1))]);
@@ -700,20 +647,6 @@ abstract class NestedSets extends Model
 
             $delta = $value - $leftValue;
 
-            /*$this->updateAll(
-                [
-                    $this->leftAttribute => new RawValue($leftAttribute . sprintf('%+d', $delta)),
-                    $this->rightAttribute => new RawValue($rightAttribute . sprintf('%+d', $delta)),
-                    $this->depthAttribute => new RawValue($depthAttribute . sprintf('%+d', $depth)),
-                    $this->treeAttribute => $nodeRootValue,
-                ],
-                [
-                    'and',
-                    ['>=', $this->leftAttribute, $leftValue],
-                    ['<=', $this->rightAttribute, $rightValue],
-                    [$this->treeAttribute => $this->getRoot()],
-                ]
-            );*/
             $nodes = $this->query()->where($leftAttribute . ' >= ' . $leftValue . ' and ' . $rightAttribute . ' <= ' . $rightValue . ' and ' . $this->getRootName() . ' = ' . $this->getRoot());
             foreach ($nodes as $node) {
                 $node->update([
@@ -738,27 +671,6 @@ abstract class NestedSets extends Model
     {
         $this->operation = self::OPERATION_DELETE_WITH_CHILDREN;
         return $this->deleteWithChildrenInternal();
-
-        /*if (!$this->isTransactional(ActiveRecord::OP_DELETE)) {
-            return $this->deleteWithChildrenInternal();
-        }
-
-        $transaction = $this->getDb()->beginTransaction();
-
-        try {
-            $result = $this->deleteWithChildrenInternal();
-
-            if ($result === false) {
-                $transaction->rollBack();
-            } else {
-                $transaction->commit();
-            }
-
-            return $result;
-        } catch (\Exception $e) {
-            $transaction->rollBack();
-            throw $e;
-        }*/
     }
 
     /**
@@ -771,11 +683,6 @@ abstract class NestedSets extends Model
             return false;
         }
 
-        /*$condition = [
-            'and',
-            ['>=', $this->leftAttribute, $this->getLeft()],
-            ['<=', $this->rightAttribute, $this->getRight()]
-        ];*/
         $query = $this->query()->where($this->getLeftName() . ' >= ' . $this->getLeft() . ' and ' . $this->getRightName() . ' <= ' . $this->getRight());
 
         $query = $this->applyTreeAttributeCondition($query);
@@ -783,8 +690,6 @@ abstract class NestedSets extends Model
         foreach($nodes as $node){
             $result = $node->delete();
         }
-        //$result = $this->deleteAll($query);
-        //$this->setOldAttributes(null);
         $this->setDirtyState(Model::DIRTY_STATE_TRANSIENT);
         $this->customAfterDelete();
 
@@ -820,23 +725,9 @@ abstract class NestedSets extends Model
         if ($this->isLeaf() || $this->operation === self::OPERATION_DELETE_WITH_CHILDREN) {
             $this->shiftLeftRightAttribute($rightValue + 1, $leftValue - $rightValue - 1);
         } else {
-            /*$condition = [
-                'and',
-                ['>=', $this->leftAttribute, $this->getLeft()],
-                ['<=', $this->rightAttribute, $this->getRight()]
-            ];*/
             $query = $this->query()->where($this->getLeftName() . ' >= ' . $leftValue . ' and ' . $this->getRightName() . ' <= ' . $rightValue);
 
             $query = $this->applyTreeAttributeCondition($query);
-
-            /*$this->updateAll(
-                [
-                    $this->leftAttribute => new RawValue($db->quoteColumnName($this->leftAttribute) . sprintf('%+d', -1)),
-                    $this->rightAttribute => new RawValue($db->quoteColumnName($this->rightAttribute) . sprintf('%+d', -1)),
-                    $this->depthAttribute => new RawValue($db->quoteColumnName($this->depthAttribute) . sprintf('%+d', -1)),
-                ],
-                $condition
-            );*/
             $nodes = $query->execute();
             foreach ($nodes as $node) {
                 $node->update([
@@ -861,7 +752,6 @@ abstract class NestedSets extends Model
     {
         foreach ([$this->getLeftName(), $this->getRightName()] as $attribute) {
             $nodes = $this->query()->where($attribute . ' >= ' . $value)
-                //->andWhere($this->getRootName() . ' = ' . $this->getRoot())
                 ->execute();
 
             foreach ($nodes as $node) {

@@ -20,7 +20,7 @@ class PhalconPayments {
      * @return StdClass Object
      */
     public function all() {
-        $payments = $this->model->find(['columns' => 'id, name']);
+        $payments = $this->model->find(['columns' => 'id, name, paymentSystem, position']);
         if (!$payments) {
             return false;
         }

@@ -150,6 +150,7 @@ class Categories extends NestedSets
             $name = $attribute['name'];
             $sql = "SELECT COLUMN_GET(attributeValues, '$name' as CHAR) as value FROM product_attribute_values WHERE productId IN ($productIds)";
             foreach($db->fetchAll($sql, Db::FETCH_ASSOC) as $row){
+                if($row['value'])
                 $attributeValues[$name][$row['value']] = $row['value'];
             }
         }

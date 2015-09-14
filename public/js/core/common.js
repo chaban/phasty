@@ -25,6 +25,7 @@
             textContains: textContains,
             langsForDropdown: langsForDropdown,
             activeLang: activeLang,
+            categoriesForDropdown: categoriesForDropdown,
             normalizeArray: normalizeArray
         };
 
@@ -152,20 +153,60 @@
             }];
         }
 
+        function categoriesForDropdown(all, temp, depth) {
+            if (!temp) {
+                temp = [];
+            }
+            if (!depth) {
+                depth = '';
+            }
+            angular.forEach(all, function(value, key) {
+                if (value.children && value.children.length) {
+                    depth = depth + "--";
+                    temp.push({
+                        'value': value.id,
+                        'label': value.title
+                    });
+                    categoriesForDropdown(value.children, temp, depth);
+                    depth = '';
+                } else {
+                    temp.push({
+                        'value': value.id,
+                        'label': depth + value.title
+                    });
+                    depth = '';
+                    delete value.children;
+                }
+            });
+            return temp;
+        }
+
         /**
          * from nested to simple array
          */
 
-        function normalizeArray(all, temp) {
+        function normalizeArray(all, temp, depth) {
             if (!temp) {
                 temp = [];
             }
+            if (!depth) {
+                depth = '';
+            }
             angular.forEach(all, function(value, key) {
                 if (value.children && value.children.length) {
-                    temp.push(value);
-                    normalizeArray(value.children, temp);
+                    depth = depth + "--";
+                    temp.push({
+                        'id': value.id,
+                        'title': value.title
+                    });
+                    normalizeArray(value.children, temp, depth);
+                    depth = '';
                 } else {
-                    temp.push(value);
+                    temp.push({
+                        'id': value.id,
+                        'title': depth + value.title
+                    });
+                    depth = '';
                     delete value.children;
                 }
             });

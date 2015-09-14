@@ -10,10 +10,11 @@ use Phasty\Common\Models\Iwi as IwiModel;
 class Iwi extends Plugin
 {
     protected $_dir;
-    protected $image;
     protected $model;
     protected $realPath;
     protected $useDummyImages = false;
+    protected $width;
+    protected $height;
     /**
      * @throws Exception
      */
@@ -25,26 +26,20 @@ class Iwi extends Plugin
     }
 
     /**
-     * @param $imagePath string image path
-     * @param $useDummyImage bool use dummy images
+     * @param  string $imagePath image path
+     * @param  bool $useDummyImages use dummy images
      * @throws Exception
      * @return Iwi|object
      */
 
-    public function load($imagePath = '', $useDummyImage = true){
-        if(file_exists($imagePath)){
+    public function load($imagePath = '', $useDummyImages = true)
+    {
+        $this->useDummyImages = $useDummyImages;
+        if ($imagePath && file_exists($imagePath)) {
             $this->realPath = $imagePath;
-        }elseif($useDummyImage) {
-            $this->useDummyImages = true;
-            return $this;
-        }else{
             return $this;
         }
-        $this->image = Image::create($this->realPath);
-        if (!$this->image)
-            throw new Exception('Image could not be loaded');
         return $this;
-
     }
 
     /**
@@ -55,51 +50,73 @@ class Iwi extends Plugin
      */
     public function showAs($width, $height, $upscale = false)
     {
-        if($this->useDummyImages){
+        $this->width = $width;
+        $this->height = $height;
+        if (!$this->realPath && $this->useDummyImages) {
             return "http://lorempixel.com/$width/$height/fashion/1";
         }
 
-        if ($this->image) {
-
-            if (!$upscale) {
-                if ($width > $this->image->getWidth())
-                    $width = $this->image->getWidth();
-
-                if ($height > $this->image->getHeight())
-                    $height = $this->image->getHeight();
-            }
-
-            $width = intval($width);
-            $height = intval($height);
-
-            $widthProportion = $width / $this->image->getWidth();
-            $heightProportion = $height / $this->image->getHeight();
-
-            if ($widthProportion > $heightProportion) {
-                $newWidth = $width;
-                $newHeight = round($newWidth / $this->image->getWidth() * $this->image->getHeight());
-            } else {
-                $newHeight = $height;
-                $newWidth = round($newHeight / $this->image->getHeight() * $this->image->getWidth());
-            }
-
-            $this->image->resize($newWidth, $newHeight)->crop($width, $height);
-            return $this->cache();
-            
+        if (!$this->realPath) {
+            return '';
         }
-        return '';
+        return $this->cache($width, $height, $upscale);
     }
 
     /**
-     * @return mixed
+     * @param string $path to resized and cached image
+     * @param int $width
+     * @param int $height
+     * @param bool $upscale
+     * @throws Exception
+     * @return $this
      */
-    public function cache()
+    private function scaleAndSaveImage($path, $width, $height, $upscale )
+    {
+        $image = Image::create($this->realPath);
+        if (!$image)
+            throw new \Exception('Image could not be loaded');
+        
+        if (!$upscale) {
+            if ($width > $image->getWidth())
+                $width = $image->getWidth();
+
+            if ($height > $image->getHeight())
+                $height = $image->getHeight();
+        }
+
+        $width = intval($width);
+        $height = intval($height);
+
+        $widthProportion = $width / $image->getWidth();
+        $heightProportion = $height / $image->getHeight();
+
+        if ($widthProportion > $heightProportion) {
+            $newWidth = $width;
+            $newHeight = round($newWidth / $image->getWidth() * $image->getHeight());
+        } else {
+            $newHeight = $height;
+            $newWidth = round($newHeight / $image->getHeight() * $image->getWidth());
+        }
+
+        $image->resize($newWidth, $newHeight)->crop($width, $height);
+        $image->save($path);
+        return $this;
+    }
+
+    /**
+     * @param int $width
+     * @param int $height
+     * @param bool $upscale
+     * @return string path to cached image
+     */
+    private function cache($width, $height, $upscale)
     {
         $path = $this->buildPath();
-        if ($path) {
-            if ($this->createOrNone() || !file_exists($path)) {
-                $this->image->save($path);
-            }
+        if (!$path) {
+            return '';
+        }
+        if ($this->needToCreate() || !file_exists($path)) {
+            $this->scaleAndSaveImage($path, $width, $height, $upscale);
         }
         $url = new Url();
         return DIRECTORY_SEPARATOR . $url->path($path);
@@ -108,13 +125,13 @@ class Iwi extends Plugin
     /**
      * @return bool|string
      */
-    public function buildPath()
+    private function buildPath()
     {
         $realPath = $this->getRealPath();
-        if (!($realPath)) {
+        if (!$realPath) {
             return false;
         }
-        $path = array();
+        $path = [];
         $info = pathinfo($realPath);
         $path[] = $this->buildDir();
         $path[] = $this->hash() . "." . $info['extension'];
@@ -124,15 +141,16 @@ class Iwi extends Plugin
     /**
      * @return string
      */
-    public function buildDir()
+    private function buildDir()
     {
+        $hash = $this->hash();
         $folder[] = $this->_dir . 'cache';
-        $folder[] = substr($this->hash(), 0, 2);
-        $folder[] = substr($this->hash(), 2, 2);
+        $folder[] = substr($hash, 0, 2);
+        $folder[] = substr($hash, 2, 2);
 
         $path[] = 'img/cache';
-        $path[] = substr($this->hash(), 0, 2);
-        $path[] = substr($this->hash(), 2, 2);
+        $path[] = substr($hash, 0, 2);
+        $path[] = substr($hash, 2, 2);
 
         $path = implode(DIRECTORY_SEPARATOR, $path);
         $folder = implode(DIRECTORY_SEPARATOR, $folder);
@@ -147,7 +165,7 @@ class Iwi extends Plugin
     /**
      * @return string
      */
-    public function hash()
+    private function hash()
     {
         return md5($this->generateBrief());
     }
@@ -155,54 +173,35 @@ class Iwi extends Plugin
     /**
      * @return string
      */
-    protected function generateBrief()
+    private function generateBrief()
     {
         $needle = [];
         $realPath = $this->getRealPath();
         array_unshift($needle, $realPath);
-        array_unshift($needle, $this->image->getWidth());
-        array_unshift($needle, $this->image->getHeight());
-        if (is_file($realPath))
-            array_unshift($needle, filemtime($realPath));
+        array_unshift($needle, filemtime($realPath));
+        array_unshift($needle, filesize($realPath));
+        array_unshift($needle, $this->width);
+        array_unshift($needle, $this->height);
         return json_encode($needle);
     }
 
     /**
      * @return bool
      */
-    public function createOrNone()
+    private function needToCreate()
     {
-        //$this->verifyTable();
         $hash = $this->hash();
-        $result = $this->model->findFirst(array(
+        $result = $this->model->findFirst([
             "conditions" => "key = ?1",
-            "bind" => [1 => "$hash"],
-            "hydration" => Resultset::HYDRATE_OBJECTS));
+            "bind" => [1 => "$hash"]]);
         if (!$result) {
-            $storage = new IwiModel();
-            $storage->key = $this->hash();
-            $storage->value = $this->generateBrief();
-            return $storage->save();
+            return $this->model->save(['key' => $hash, 'value' => $this->generateBrief()]);
         }
         return false;
     }
 
-    /**
-     * Verify table
-     */
-    public function verifyTable()
+    private function getRealPath()
     {
-        /*if (!Yii::app()->getDb()->schema->getTable('{{storage}}'))
-        {
-          Yii::app()->getDb()->createCommand()->createTable("{{storage}}", array(
-            'key' => 'string',
-            'value' => 'text',
-            ));
-        }*/
-        return true;
-    }
-
-    public function getRealPath(){
         return $this->realPath;
     }
 }

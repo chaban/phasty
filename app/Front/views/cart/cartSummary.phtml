@@ -1,6 +1,6 @@
 <div class="row">
     <div class="col-sm-6">
-        <div class="chose_area">
+        <!-- <div class="chose_area">
             <ul class="user_option">
                 <li>
                     <input type="checkbox">
@@ -49,17 +49,17 @@
             </ul>
             <a class="btn btn-default update" href="">Get Quotes</a>
             <a class="btn btn-default check_out" href="">Continue</a>
-        </div>
+        </div> -->
     </div>
     <div class="col-sm-6">
         <div class="total_area">
             <ul>
-                <li>Cart Sub Total <span><?php echo $order['subtotal'] ?></span></li>
                 <li>Products count <span><?php echo $order['products_count'] ?></span></li>
-                <li>Tax <span><?php echo $order['tax'] ?></span></li>
-                <li>Discount <span><?php echo $order['discount'] ?></span></li>
-                <li>Shipping Cost <span><?php echo $order['delivery'] ?></span></li>
                 <li>Value <span><?php echo $order['value'] ?></span></li>
+                <li>Discount <span><?php echo $order['discount'] ?></span></li>
+                <li>Cart Sub Total <span><?php echo $order['subtotal'] ?></span></li>
+                <li>Tax <span><?php echo $order['tax'] ?></span></li>
+                <li>Shipping Cost <span><?php echo $order['delivery'] ?></span></li>
                 <li>Total <span><?php echo $order['total'] ?></span></li>
             </ul>
             <a class="btn btn-default update_cart_page update" href="">Update</a>

@@ -13,6 +13,17 @@
         vm.formData = {};
         vm.submitFailed = submitFailed;
         vm.validationFailed = validationFailed;
+        vm.editorOptions = {
+            language: 'ru',
+            uiColor: '#000000'
+        };
+        vm.optionsForRadioButton = [{
+            label: 'Active',
+            value: 'Y'
+        }, {
+            label: 'Not Active',
+            value: 'N'
+        }];
 
         activate();
 

@@ -1,5 +1,6 @@
 <?php namespace Phasty\Common\Models;
 
+use Phalcon\Db\RawValue;
 use Phalcon\Mvc\Model;
 
 class Deliveries extends Model
@@ -69,6 +70,13 @@ class Deliveries extends Model
         );
     }
 
-
-
+    public function beforeValidationOnCreate()
+    {
+        if (!$this->position) {
+            $this->position = new RawValue('default');
+        }
+        if(!$this->active){
+            $this->active = new RawValue('default');
+        }
+    }
 }

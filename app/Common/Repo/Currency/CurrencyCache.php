@@ -20,16 +20,16 @@ class CurrencyCache extends Plugin{
      */
     public function all() {
         $key = md5('all-currencies-as-array');
-        if( $this->modelsCache->exists($key) )
+        if( $this->cache->exists($key) )
         {
-            return $this->modelsCache->get($key);
+            return $this->cache->get($key);
         }
         $rows = $this->model->find();
         $currencies = [];
         foreach ($rows as $result) {
             $currencies[$result->name] = $result->toArray();
         }
-        $this->modelsCache->save($key, $currencies);
+        $this->cache->save($key, $currencies);
         return $currencies;
     }
 

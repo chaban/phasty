@@ -10,9 +10,9 @@
     function ProductsTableController(Products, logger, $translate, mkModalDialog) {
         /*jshint validthis: true */
         var vm = this;
-        vm.fields = ['id', 'name', 'price', 'rating', 'viewsCount', 'addedToCartCount', 'quantity', 'availability', 'active'];
+        vm.fields = ['id', 'name', 'price', 'category', 'brand', 'quantity', 'availability', 'rating', 'active'];
         vm.deleteResource = deleteResource;
-        vm.tableActions = tableActions;
+        vm.getAll = getAll;
         vm.showModal = showModal;
 
         activate();
@@ -24,16 +24,12 @@
             $translate(['Confirm_Delete', 'Delete']).then(function(tr) {
                 vm.modal = mkModalDialog.deleteDialog(tr.Confirm_Delete, tr.Delete);
             });
+            getAll();
         }
 
-        function tableActions(currentPage, pageItems, filterBy, filterByFields, orderBy, orderByReverse) {
-            vm.tableItems = Products.byProduct(currentPage, pageItems, filterBy, filterByFields, orderBy, orderByReverse);
-            vm.tableItems.$then(function(_collection) {
-                vm.totalItems = _collection.$metadata.totalItems;
-                vm.pageItems = _collection.$metadata.limit;
-                vm.currentPage = _collection.$metadata.pageNumber ? _collection.$metadata.pageNumber : 0;
-            });
-            logger.info('Products loaded');
+        function getAll() {
+            vm.tableItems = Products.getAll();
+            logger.success('Products loaded');
         }
 
         function showModal(gridItem) {

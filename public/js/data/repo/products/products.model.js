@@ -12,7 +12,7 @@
         //var collection = products.$collection();
 
         var service = {
-            byProduct: byProduct,
+            getAll: getAll,
             deleteProduct: deleteProduct,
             editProduct: editProduct,
             createProduct: createProduct
@@ -20,17 +20,11 @@
 
         return service;
 
-        function byProduct(currentPage, pageItems, filterBy, filterByFields, orderBy, orderByReverse) {
-            var order = 'asc';
-            if (!orderByReverse) {
-                order = 'desc';
-            }
-            return products.$search({
-                page: currentPage,
-                limit: pageItems,
-                orderBy: orderBy,
-                filterByFields: filterByFields,
-                order: order
+        function getAll() {
+            return products.$search().$then(function(_products) {
+                return _products;
+            }, function() {
+                logger.error('Pages not found');
             });
         }
 

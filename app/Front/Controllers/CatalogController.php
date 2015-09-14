@@ -19,10 +19,10 @@ class CatalogController extends ControllerBase
 
     protected function initialize()
     {
-        $this->brands = new CacheBrands();
         $this->categories = new CacheCategories();
+        $this->brands = new CacheBrands();
         parent::initialize();
-        $this->tag->setTitle('Catalog | E-Shopper');
+        $this->tag->setTitle('Catalog | Phasty');
     }
 
     /**
@@ -32,23 +32,22 @@ class CatalogController extends ControllerBase
     public function indexAction($slug = null)
     {
         $categories = $this->categories->all()->categories;
-        $brands = $this->brands->all()->brands;
         $this->view->setVars([
             'categories' => $this->jsonEncode($categories),
-            'brands' => $this->prepareForSelectBox($brands),
             'pager' => $this->getPager($slug),
             'maxPrice' => $this->maxPrice,
             'category' => $this->category,
+            'brands' => $this->prepareBrandsForSelectBox()
         ]);
     }
 
     public function searchAction()
     {
-        if($this->request->isAjax()) {
+        if ($this->request->isAjax()) {
             $this->view->disable();
             //$input =  filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
             $input = $this->request->getPost();
-            if(is_array($input) && !empty(array_filter($input)) && $this->persistent->slug){
+            if (is_array($input) && !empty(array_filter($input)) && $this->persistent->slug) {
                 $input['slug'] = $this->persistent->slug;
                 $pager = $this->execute(SearchProductsCommand::class, $input);
                 echo $this->view->partial('catalog/_list', ['pager' => $pager]);
@@ -56,36 +55,30 @@ class CatalogController extends ControllerBase
         }
     }
 
-    protected function prepareForSelectBox($array = [])
+    protected function prepareBrandsForSelectBox()
     {
+        $brands = [];
         $temp = [];
-        foreach ($array as $key => $value) {
-            $temp[$value['id']] = $value['name'];
+        if ($this->category) {
+            $brands = $this->brands->getBrandsForCategory($this->category->id);
         }
-        return $temp;
+        if (!empty($brands)) {
+            foreach ($brands as $key => $value) {
+                $temp[$value['id']] = $value['name'];
+            }
+            return $temp;
+        }
     }
 
     protected function getPager($slug = null)
     {
         $this->persistent->slug = $slug;
         $numberPage = $this->request->getQuery("page", "int", 1);
-        if (!$numberPage or $numberPage <= 0) {
-            $numberPage = 1;
-        }
 
         $this->category = $slug ? Categories::findFirst("slug = '$slug'") : null;
         $this->maxPrice = $this->category ? Products::getMaxPrice($this->category->id) : Products::getMaxPrice();
 
-        $pager = new Pager(new Model([
-            "data" => $this->category ? Products::find(["categoryId = :id:", 'bind' => ['id' => $this->category->id]]) : Products::find(),
-            "limit" => 6,
-            "page" => (int)$numberPage]),
-            [
-                'layoutClass' => 'Phalcon\Paginator\Pager\Layout\Bootstrap',
-                'rangeLength' => 5,
-                'urlMask' => '?page={%page_number}',
-            ]);
-        return $pager;
+        return $this->execute(SearchProductsCommand::class, ['page' => $numberPage, 'slug' => $slug]);
     }
 
 }

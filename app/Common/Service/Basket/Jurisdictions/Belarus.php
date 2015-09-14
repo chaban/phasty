@@ -1,10 +1,11 @@
 <?php namespace Phasty\Common\Service\Basket\Jurisdictions;
 
 use Money\Currency;
+use Phalcon\Mvc\User\Plugin;
 use PhilipBrown\Basket\Jurisdiction;
 use Phasty\Common\Service\Basket\TaxRates\BelarusValueAddedTax;
 
-class Belarus implements Jurisdiction
+class Belarus extends Plugin implements Jurisdiction
 {
     /**
      * @var Currency
@@ -22,7 +23,7 @@ class Belarus implements Jurisdiction
     public function __construct()
     {
         $this->tax = new BelarusValueAddedTax;
-        $this->currency = new Currency('BYR');
+        $this->currency = $this->session->has('currency') ? new Currency($this->session->get('currency'))  : new Currency('BYR');
     }
 
     /**

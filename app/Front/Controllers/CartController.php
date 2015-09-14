@@ -2,8 +2,8 @@
 
 use Phalcon\Commander\CommanderTrait;
 use Phasty\Common\Models\Products;
-use PhilipBrown\Basket\Converter;
 use Phasty\Common\Commands\GenerateOrderCommand;
+use Phasty\Common\Repo\Currency\CurrencyCache;
 
 
 class CartController extends ControllerBase
@@ -13,14 +13,13 @@ class CartController extends ControllerBase
     protected function initialize()
     {
         parent::initialize();
-        $this->tag->setTitle('Shopping cart | E-Shopper');
+        $this->tag->setTitle('Shopping cart | Phasty');
     }
 
     public function indexAction()
     {
         $this->view->setVars([
-            'converter' => new Converter(),
-            'order' => $this->getOrderAsArray()
+            'order' => $this->getOrderMetaArray()
         ]);
     }
 
@@ -42,6 +41,7 @@ class CartController extends ControllerBase
                     break;
                 }
             }
+            //if discount for category has been set, discount for brand will be owerwriten
             foreach ($model->category->discount as $value) {
                 if (isset($value->name) && isset($value->sum)) {
                     $discount = $value->toArray();
@@ -82,8 +82,7 @@ class CartController extends ControllerBase
             if ($item)
                 $item->remove();
             $this->view->partial('cart/index', [
-                'converter' => new Converter(),
-                'order' => $this->getOrderAsArray()
+                'order' => $this->getOrderMetaArray()
             ]);
         }
     }
@@ -102,14 +101,26 @@ class CartController extends ControllerBase
             if ($item)
                 $item->update('quantity', $quantity);
             $this->view->partial('cart/index', [
-                'converter' => new Converter(),
-                'order' => $this->getOrderAsArray()
+                'order' => $this->getOrderMetaArray()
             ]);
         }
     }
 
-    protected function getOrderAsArray()
+    /**
+     * Generate information about order
+     * @return array
+     */
+    protected function getOrderMetaArray()
     {
-        return $this->execute(GenerateOrderCommand::class, ['convert' => true]);
+        if($this->cart->total()) {
+            $orderMetaArray = $this->execute(GenerateOrderCommand::class, ['convert' => true]);
+            $this->session->set('orderInfo', [
+                'meta' => $orderMetaArray
+            ]);
+            return $orderMetaArray;
+        }else{
+            $this->session->remove('orderInfo');
+        }
+        return [];
     }
 }

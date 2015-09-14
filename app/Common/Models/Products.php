@@ -124,7 +124,11 @@ class Products extends Model
      */
     public $fullDescription;
 
-    protected $imagesDir;
+    /**
+     * @var string
+     *
+     */
+    public $attributeValues;
 
     /**
      * @return array
@@ -133,7 +137,7 @@ class Products extends Model
     {
         return [
             'categoryId', 'brandId', 'name', 'price', 'maxPrice', 'active', 'quantity',
-            'availability', 'autoDecreaseQuantity', 'fullDescription'
+            'availability', 'autoDecreaseQuantity', 'shortDescription', 'fullDescription'
         ];
     }
 
@@ -142,9 +146,7 @@ class Products extends Model
      */
     public function initialize()
     {
-        $config = $this->getDI()->getConfig();
         $this->useDynamicUpdate(true);
-        $this->imagesDir = BASE_DIR . DIRECTORY_SEPARATOR . 'public' . $config->app->productImagesPath;
         $this->addBehavior(new SlugBehavior([
             'slug_col' => 'slug', //The column name for the slug
             'title_col' => 'name', //The column name for the unqiue url
@@ -155,7 +157,7 @@ class Products extends Model
         $this->belongsTo('brandId', '\Phasty\Common\Models\Brands', 'id', array('alias' => 'Brand'));
         $this->belongsTo('categoryId', '\Phasty\Common\Models\Categories', 'id', array('alias' => 'Category'));
         $this->hasMany('id', '\Phasty\Common\Models\Reviews', 'productId', array('alias' => 'Reviews'));
-        $this->hasOne('id', '\Phasty\Common\Models\AttributeValues', 'productId', array('alias' => 'AttributeValues'));
+        $this->hasOne('id', '\Phasty\Common\Models\AttributeValues', 'productId', array('alias' => 'AttributeValue'));
     }
 
     public function beforeValidationOnCreate()
@@ -168,6 +170,8 @@ class Products extends Model
             $this->sku = md5($this->name);
         if (!$this->shortDescription)
             $this->shortDescription = '';
+        if (!$this->attributeValues)
+            $this->attributeValues = '';
         $this->viewsCount = 0;
         $this->addedToCartCount = 0;
         $this->rating = 0;
@@ -203,6 +207,7 @@ class Products extends Model
 
     public function afterDelete()
     {
+        $this->attributeValue->delete();
         $config = $this->getDI()->getConfig();
         $imagesPath = BASE_DIR . DIRECTORY_SEPARATOR . 'public' . $config->app->productImagesPath . $this->id;
         util::rmdir($imagesPath);
@@ -240,8 +245,9 @@ class Products extends Model
 
     public function getImages($all = false)
     {
+        $config = $this->getDI()->getConfig();
+        $imagesFolder = BASE_DIR . DIRECTORY_SEPARATOR . 'public' . $config->app->productImagesPath . $this->id;
         $images = null;
-        $imagesFolder = $this->imagesDir . $this->id;
         if (is_dir($imagesFolder)) {
             $images = CFileHelper::findFiles($imagesFolder, ['fileTypes' => ['jpg', 'jpeg', 'gif', 'png'], 'level' => 0,]);
         }
@@ -258,7 +264,7 @@ class Products extends Model
     {
         if ($categoryId)
             $maxPrice = self::findFirst(["categoryId = '$categoryId'", 'order' => 'price DESC',
-                "cache" => ["key" => "maxPriceWithCategory_".$categoryId]]);
+                "cache" => ["key" => "maxPriceWithCategory_" . $categoryId]]);
         else
             $maxPrice = self::findFirst(['order' => 'price desc', "cache" => ["key" => "productsMaxPrice"]]);
         if ($maxPrice) {

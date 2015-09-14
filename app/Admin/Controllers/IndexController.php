@@ -1,83 +1,51 @@
 <?php namespace Phasty\Admin\Controllers;
 
 use Phalcon\Mvc\View;
+use Phasty\Common\Repo\Dashboard\Dashboard;
 
-class IndexController extends ControllerBase {
+class IndexController extends ControllerBase
+{
 
-	protected function initialize()
-	{
-		parent::initialize();
-		$this->tag->setTitle('Admin area | E-Shopper');
-	}
+    protected $repo;
 
-	/**
-	 * Display a listing of the resource.
-	 *
-	 * @return Response
-	 */
-	public function indexAction() {
-		$this->view->enable();
-		$this->view->setRenderLevel(View::LEVEL_MAIN_LAYOUT);
-		//$this->utils->var_dump($this->view);die;
-		//return Response::json(['success' => 'success']);
-	}
+    protected function initialize()
+    {
+        $this->repo = new Dashboard();
+        parent::initialize();
+        $this->tag->setTitle('Admin area | Phasty');
+    }
 
-	/**
-	 * Show the form for creating a new resource.
-	 *
-	 * @return Response
-	 */
-	public function create() {
-		//
-	}
+    /**
+     * Display a listing of the resource.
+     *
+     * @return Response
+     */
+    public function indexAction()
+    {
+        $this->view->enable();
+        $this->view->setRenderLevel(View::LEVEL_MAIN_LAYOUT);
+    }
 
-	/**
-	 * Store a newly created resource in storage.
-	 *
-	 * @return Response
-	 */
-	public function store() {
-		//
-	}
-
-	/**
-	 * Display the specified resource.
-	 *
-	 * @param  int  $id
-	 * @return Response
-	 */
-	public function show($id) {
-		//
-	}
-
-	/**
-	 * Show the form for editing the specified resource.
-	 *
-	 * @param  int  $id
-	 * @return Response
-	 */
-	public function edit($id) {
-		//
-	}
-
-	/**
-	 * Update the specified resource in storage.
-	 *
-	 * @param  int  $id
-	 * @return Response
-	 */
-	public function update($id) {
-		//
-	}
-
-	/**
-	 * Remove the specified resource from storage.
-	 *
-	 * @param  int  $id
-	 * @return Response
-	 */
-	public function destroy($id) {
-		//
-	}
+    /**
+     * return dashboard data.
+     *
+     * @return Response
+     */
+    public function dashboardAction()
+    {
+        $data = null;
+        if('yes' == $this->request->getQuery('needToken')){
+            $data = new \stdClass();
+            $temp = [];
+            $temp[]['token'] = $this->auth->getJwtToken();
+            $data->dashboards = $temp;
+        }else {
+            $data = $this->repo->all();
+        }
+        if (!$data) {
+            return $this->errorNotFound('There is no data to show');
+        }
+        return $this->apiOk($data);
+    }
 
 }

@@ -63,12 +63,11 @@ trait RestControllerTrait {
             'http_code' => $this->statusCode,
             'message' => $message,
         ];
-        //$response = Response::json($error, $this->getStatusCode());
-        $response = new Response();
-        $response->setStatusCode($this->getStatusCode(), $errorCode);
-        $response->setContentType('application/json', 'UTF-8');
-        $response->setContent(json_encode($error, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES | JSON_PRETTY_PRINT));
-        return $response->send();
+        $this->response->setStatusCode($this->getStatusCode(), $errorCode);
+        $this->setHeaders();
+        $this->response->setContent(json_encode($error, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES | JSON_PRETTY_PRINT));
+        $this->response->send();
+        exit;
     }
 
     /**
@@ -129,8 +128,20 @@ trait RestControllerTrait {
      */
     public function apiOk($data = []){
         $this->response->setStatusCode(200, 'OK');
-        $this->response->setContentType('application/json', 'UTF-8');
+        $this->setHeaders();
         $this->response->setContent(json_encode($data, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES | JSON_PRETTY_PRINT));
         $this->response->send();
+        exit;
+    }
+
+    /**
+     * @return Response
+     */
+    protected function setHeaders(){
+        $this->response->setHeader('Access-Control-Allow-Headers', 'Content-Type, X-Requested-With, Authorization');
+        $this->response->setHeader('Access-Control-Allow-Origin', '*');
+        $this->response->setHeader('Access-Control-Allow-Methods', 'GET,PUT,PATCH,POST,DELETE');
+        $this->response->setContentType('application/json', 'UTF-8');
+        return $this;
     }
 }

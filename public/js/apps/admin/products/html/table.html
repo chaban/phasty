@@ -5,7 +5,7 @@
             <div class="pull-right .col-md-2"><a style="color:white" ui-sref="products.create" class="btn btn-primary" title="{{'Products.Create' | translate}}">{{'Products.Create' | translate}}</a>
             </div>
         </div>
-        <table tr-ng-grid="" items="vm.tableItems" fields="vm.fields" page-items="vm.pageItems || 10" total-items="vm.totalItems" current-page="vm.currentPage || 0" selection-mode="SingleRow" class="table table-striped table-condensed" on-data-required="vm.tableActions(currentPage, pageItems, filterBy, filterByFields, orderBy, orderByReverse)">
+        <table tr-ng-grid="" items="vm.tableItems" page-items="20" fields="vm.fields" selection-mode="SingleRow" class="table table-striped table-condensed">
             <thead>
                 <tr>
                     <th field-name="id" cell-width="4em" display-align="right"></th>
@@ -21,15 +21,19 @@
             <tbody>
                 <tr>
                     <td>
-                        <a ui-sref="products.edit({ id: gridItem.id })" class="pull-left"><i class="glyphicon glyphicon-edit" title="{{'Edit' | translate}}"></i>
-                        </a>
-                        <a ui-sref="products.attributes({ id: gridItem.id })" class="" style="margin: 0 10%"><i class="glyphicon glyphicon-list" title="{{'Products.Attributes' | translate}}"></i>
-                        </a>
-                        <a ui-sref="products.images({ id: gridItem.id })" class=""><i class="glyphicon glyphicon-picture" title="{{'Products.Images' | translate}}"></i>
-                        </a>
+                        <span style="cursor: pointer" ui-sref="products.edit({ id: gridItem.id })"><i class="glyphicon glyphicon-edit" title="{{'Edit' | translate}}"></i>
+                        </span>
                     </td>
                     <td>
-                        <span style="cursor: pointer" class="pull-right" ng-click="vm.showModal(gridItem);$event.stopPropagation();" backdrop="static" data-template="mkModalDialog.tpl.html" data-html="true" bs-modal="vm.modal">
+                        <span style="cursor: pointer" ui-sref="products.attributes({ id: gridItem.id })" style="margin: 0 10%"><i class="glyphicon glyphicon-list" title="{{'Products.Attributes' | translate}}"></i>
+                        </span>
+                    </td>
+                    <td>
+                        <span style="cursor: pointer" ui-sref="products.images({ id: gridItem.id })"><i class="glyphicon glyphicon-picture" title="{{'Products.Images' | translate}}"></i>
+                        </span>
+                    </td>
+                    <td>
+                        <span style="cursor: pointer" ng-click="vm.showModal(gridItem);$event.stopPropagation();" backdrop="static" data-template="mkModalDialog.tpl.html" data-html="true" bs-modal="vm.modal">
                         <i class="glyphicon glyphicon-remove " title="{{'Delete' | translate}}"></i>
                         </span>
                     </td>

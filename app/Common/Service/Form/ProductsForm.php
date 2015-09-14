@@ -25,10 +25,6 @@ class ProductsForm extends Validation {
             'message' => 'The price is required'
         ]));
 
-        $this->add('maxPrice', new PresenceOf([
-            'message' => 'The maxPrice is required'
-        ]));
-
         $this->add('availability', new InclusionIn(array(
             'message' => 'The availability must be Y or N',
             'domain' => array('Y', 'N'),

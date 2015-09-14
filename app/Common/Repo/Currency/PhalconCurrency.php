@@ -1,8 +1,9 @@
 <?php namespace Phasty\Common\Repo\Currency;
 
 use Phasty\Common\Models\Currencies;
+use Phasty\Common\Repo\Repo;
 
-class PhalconCurrency {
+class PhalconCurrency extends Repo {
 
 	protected $model;
 
@@ -43,36 +44,4 @@ class PhalconCurrency {
 		$result->currencies = $currencies->toArray();
 		return $result;
 	}
-
-	/**
-	 * Create a new currency
-	 *
-	 * @param array  Data to create a new object
-	 * @return boolean
-	 */
-	public function create(array $data) {
-		return $this->model->create($data, $this->model->getWhiteList());
-	}
-
-	/**
-	 * Update an existing currency
-	 *
-	 * @param int id of the currency
-	 * @param array  Data to update an currency
-	 * @return boolean
-	 */
-	public function update($id, array $data) {
-		return $this->model->findFirst("id = '$id'")->update($data, $this->model->getWhiteList());
-	}
-
-	/**
-	 * Delete an existing Resource
-	 *
-	 * @param int id of resource
-	 * @return boolean
-	 */
-	public function delete($id) {
-		return $this->model->findFirst("id = '$id'")->delete();
-	}
-
 }

@@ -8,7 +8,7 @@ class ProductsController extends ControllerBase
     protected function initialize()
     {
         parent::initialize();
-        $this->tag->setTitle('Product | E-Shopper');
+        $this->tag->setTitle('Product | Phasty');
     }
 
     /**

@@ -7,7 +7,7 @@ class ReviewsController extends ControllerBase
     protected function initialize()
     {
         parent::initialize();
-        $this->tag->setTitle('Currencies | E-Shopper');
+        $this->tag->setTitle('Product Reviews | Phasty');
     }
 
     /**

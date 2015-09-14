@@ -26,9 +26,9 @@ class ProductsRepo extends Plugin
     public function byId($id)
     {
         $brands = Brands::find(['columns' => 'id, name']);
-        $categories = Categories::find(['columns' => 'id, title']);
+        $categories = Categories::find(['id > 1', 'columns' => 'id, title']);
         $product = $this->model->findFirst(["id = '$id'", 'columns' =>
-            'name, fullDescription, categoryId, brandId, price, maxPrice, quantity, availability,
+            'name, fullDescription, categoryId, brandId, price, quantity, availability,
              autoDecreaseQuantity, active']);
         if (!$product || !$brands || !$categories) {
             return false;
@@ -42,12 +42,40 @@ class ProductsRepo extends Plugin
     }
 
     /**
+     * Get all resources
+     *
+     *
+     * @return StdClass Object
+     */
+    public function all() {
+        $products = $this->model->find();
+        if (!$products) {
+            return false;
+        }
+        $temp = [];
+        foreach($products as $key => $product){
+            $temp[$key]['id'] = $product->id;
+            $temp[$key]['name'] = $product->name;
+            $temp[$key]['price'] = $product->price;
+            $temp[$key]['category'] = $product->category->title;
+            $temp[$key]['brand'] = $product->brand->name;
+            $temp[$key]['quantity'] = $product->quantity;
+            $temp[$key]['availability'] = $product->availability;
+            $temp[$key]['rating'] = $product->rating;
+            $temp[$key]['active'] = $product->active;
+        }
+        $result = new \StdClass();
+        $result->products = $temp;
+        return $result;
+    }
+
+    /**
      * Get paginated products
      * @param array $params from _GET[]
      *
      * @return StdClass Object with $items and $totalItems for pagination
      */
-    public function byPage($params = array())
+    /*public function byPage($params = array())
     {
         $limit = isset($params['limit']) ? $params['limit'] : 10;
         $pageNumber = isset($params['page']) ? $params['page'] : 0;
@@ -91,7 +119,7 @@ class ProductsRepo extends Plugin
         $result->products = $products->toArray();
 
         return $result;
-    }
+    } */
 
     /**
      * Create a new product

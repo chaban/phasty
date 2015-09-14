@@ -8,11 +8,11 @@
     PagesModel.$inject = ['restmod', 'logger', '$state'];
 
     function PagesModel(restmod, logger, $state) {
-        var pages = restmod.model('/admin/page/');
+        var pages = restmod.model('/admin/pages/');
         //var collection = pages.$collection();
 
         var service = {
-            byPage: byPage,
+            getAll: getAll,
             deletePage: deletePage,
             editPage: editPage,
             createPage: createPage
@@ -20,17 +20,11 @@
 
         return service;
 
-        function byPage(currentPage, pageItems, filterBy, filterByFields, orderBy, orderByReverse) {
-            var order = 'asc';
-            if (!orderByReverse) {
-                order = 'desc';
-            }
-            return pages.$search({
-                page: currentPage,
-                limit: pageItems,
-                orderBy: orderBy,
-                filterByFields: filterByFields,
-                order: order
+        function getAll() {
+            return pages.$search().$then(function(_pages) {
+                return _pages;
+            }, function() {
+                logger.error('Pages not found');
             });
         }
 
